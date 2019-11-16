@@ -1,0 +1,23 @@
+<br>
+<div class="row">
+  <h1 class="section-title text-center">PRODUCTOS</h1>
+</div>
+<br>
+<label class="text-muted">Ordenar por:</label>
+<select class="browser-default custom-select">
+  <option selected>Default</option>
+  <option value="1">One</option>
+  <option value="2">Two</option>
+  <option value="3">Three</option>
+</select>
+<br><br>
+<div class="card-columns">
+  <div class="card shadow bg-white" *ngFor="let product of products">
+    <img class="img-fluid" src="{{ product.image }}" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{ product.name }}</h5>
+      <p class="card-text">{{ product.description }}</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+</div>

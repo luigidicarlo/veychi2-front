@@ -1,0 +1,37 @@
+<div class="container">
+    <form>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Código del cupón</label>
+                    <input type="text" class="form-control" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Descripción del Cupón</label>
+                    <input type="text" class="form-control" placeholder="Another input">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Tipo de cupón</label>
+                    <select class="form-control" [(ngModel)]="selectedOption">
+                      <option *ngFor="let option of options" [selected]="options.name === 'Porcentaje'">{{ option.name }}</option>                     
+                    </select>
+                </div>
+                <div class="form-group">
+                    <ng-container *ngIf="printedOption == 'Porcentaje'">
+                        <label for="exampleFormControlTextarea1">Monto del cupón (%)</label>
+                        <input type="number" class="form-control" placeholder="Ej: 50">
+                    </ng-container>
+                    <ng-container *ngIf="printedOption == 'Cantidad'">
+                        <label for="exampleFormControlTextarea1">Monto del cupón (CLP)</label>
+                        <input type="number" class="form-control" placeholder="Ej: 10000">
+                    </ng-container>
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+    <form>
+        
+    </form>
+</div>
+

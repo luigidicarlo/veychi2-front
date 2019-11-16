@@ -1,0 +1,39 @@
+.title-container {
+    width: 50%; 
+    padding: 0; 
+    margin: 0 auto; 
+    border-radius: 20px;
+}
+
+.bg-yellow {
+    background-color: #fee086; 
+}
+
+.title-home {
+    text-align: center; 
+    color: #fff; 
+    padding: 0; 
+    margin: 0;
+}
+
+.card-container{
+    background-color: #fff;
+}
+
+.section-title {
+    color: #212529;
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 30;
+    font-family: oswald;
+    text-decoration: none;
+    background-image: linear-gradient(to right, #c4366d, #c4366d);
+    background-position: bottom left;
+    background-repeat: no-repeat;
+    background-size: 50% 2px;
+    transition: background-size .5s ease;
+}
+
+.section-title:hover {
+    background-size: 100% 2px;
+}

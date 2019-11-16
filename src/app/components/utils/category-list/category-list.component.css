@@ -1,0 +1,14 @@
+.accordion-header {
+    background-color: #ab74bf;
+}
+
+.container-sidebar {
+    margin-top: 10%;
+}
+
+.accordion-header h1 {
+    padding: 5%;
+    color: white;
+    margin: 0;
+    font-size: 1.5em;
+}
