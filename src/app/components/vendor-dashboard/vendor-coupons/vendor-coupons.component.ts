@@ -46,6 +46,8 @@ export class VendorCouponsComponent implements OnInit {
     }
   ];
 
+  actualPage: number = 1;
+
   constructor() { }
 
   ngOnInit() {

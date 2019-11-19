@@ -47,7 +47,7 @@ a:focus {
   #sidebar {
       min-width: 250px;
       max-width: 250px;
-      background: #7386D5;
+      background: #ab74bf;
       color: #fff;
       transition: all 0.3s;
   }
@@ -118,7 +118,7 @@ a:focus {
   }
   
   a.download {
-      background: #6b6b6b;
+      background: #fff;
       color: #47748b;
   }
   

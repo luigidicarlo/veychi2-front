@@ -21,7 +21,7 @@
   
       <!--Table body-->
       <tbody>
-        <tr *ngFor="let coupon of coupons">          
+        <tr *ngFor="let coupon of coupons | paginate: {itemsPerPage: 7, currentPage: actualPage}">          
           <td class="align-middle text-center">{{ coupon.code }}</td>
           <td class="align-middle text-center">
             <span class="discount-type">
@@ -44,7 +44,7 @@
         </tr>        
       </tbody>
       <!--Table body-->
-  
+      <pagination-controls (pageChange)="actualPage = $event"></pagination-controls>
     </table>
     <!--Table-->
   

@@ -7,7 +7,7 @@
         <!--Grid column-->
         <div class="col-md-6 mb-4">
 
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/14.jpg" class="img-fluid" alt="">
+          <img src="{{ product.image }}" class="img-fluid" alt="">
 
         </div>
         <!--Grid column-->
@@ -34,14 +34,12 @@
               <span class="mr-1">
                 <del>$200</del>
               </span>
-              <span>$100</span>
+              <span>{{ product.price }}</span>
             </p>
-
+            <h1>{{ product.name }}</h1>
             <p class="lead font-weight-bold">Descripción</p>
 
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dolor suscipit libero eos atque quia ipsa
-              sint voluptatibus!
-              Beatae sit assumenda asperiores iure at maxime atque repellendus maiores quia sapiente.</p>
+            <p>{{ product.description }}</p>
 
             <form class="d-flex justify-content-left">
               <!-- Default input -->

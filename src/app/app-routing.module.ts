@@ -40,7 +40,7 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: 'single-product',
+    path: 'single-product/:id',
     component: SingleProductComponent
   },
   {
@@ -81,7 +81,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'categorias/:id',
+    path: 'categorias/:name',
     component: ProductCategoryComponent
   }
 ];

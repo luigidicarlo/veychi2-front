@@ -12,8 +12,8 @@
 </select>
 <br><br>
 <div class="card-columns">
-  <div class="card shadow bg-white" *ngFor="let product of products">
-    <img class="img-fluid" src="{{ product.image }}" alt="...">
+  <div class="card shadow bg-white" *ngFor="let product of products | paginate: {itemsPerPage: 7, currentPage: actualPage}">
+    <a [routerLink]="['/single-product', product.id]"><img class="img-fluid" src="{{ product.image }}" alt="..."></a>
     <div class="card-body">
       <h5 class="card-title">{{ product.name }}</h5>
       <p class="card-text">{{ product.description }}</p>
@@ -21,3 +21,4 @@
     </div>
   </div>
 </div>
+<pagination-controls (pageChange)="actualPage = $event"></pagination-controls>

@@ -82,6 +82,8 @@ export class VendorOrdersComponent implements OnInit {
     
   ];
 
+  actualPage: number = 1
+
   constructor() { }
 
   ngOnInit() {

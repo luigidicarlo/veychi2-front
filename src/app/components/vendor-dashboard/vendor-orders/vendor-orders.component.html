@@ -21,7 +21,7 @@
 
     <!--Table body-->
     <tbody>
-      <tr *ngFor="let order of orders">
+      <tr *ngFor="let order of orders | paginate: {itemsPerPage: 7, currentPage: actualPage}">
         <th scope="row align-middle text-center"><img class="img-fluid img-size" src="{{ order.image }}"></th>
         <td class="align-middle text-center">{{ order.order }}</td>
         <td class="align-middle text-center">{{ order.article }}</td>
@@ -38,7 +38,7 @@
       </tr>      
     </tbody>
     <!--Table body-->
-
+    <pagination-controls (pageChange)="actualPage = $event"></pagination-controls>
   </table>
   <!--Table-->
 

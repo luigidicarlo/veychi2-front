@@ -19,7 +19,7 @@
 
     <!--Table body-->
     <tbody>
-      <tr *ngFor="let product of produts">
+      <tr *ngFor="let product of products | paginate: {itemsPerPage: 7, currentPage: actualPage}">
         <th scope="row align-middle text-center"><img class="img-fluid img-size" src="{{ product.image }}"></th>
         <td class="align-middle text-center">{{ product.name }}</td>
         <td class="align-middle text-center">{{ product.price }}</td>
@@ -31,7 +31,7 @@
       </tr>      
     </tbody>
     <!--Table body-->
-
+    <pagination-controls (pageChange)="actualPage = $event"></pagination-controls>
   </table>
   <!--Table-->
 
