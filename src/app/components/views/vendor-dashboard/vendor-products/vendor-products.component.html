@@ -1,0 +1,42 @@
+<div class="table-responsive">
+  <a routerLink="/vendor-panel/crear-producto" class="btn btn-primary text-right btn-add float-right">
+    Crear Producto
+  </a>
+  
+  <!--Table-->
+  <table style="background: #fff;" class="table">
+
+    <!--Table head-->
+    <thead>
+      <tr style="background: #c4366d;">
+        <th class="th-lg text-white text-center">Imagen</th>
+        <th class="th-lg text-white text-center">Nombre</th>        
+        <th class="th-lg text-white text-center">Precio</th>        
+        <th class="th-lg text-white text-center">Acciones</th>
+      </tr>
+    </thead>
+    <!--Table head-->
+
+    <!--Table body-->
+    <tbody>
+      <tr *ngFor="let product of products | paginate: {itemsPerPage: 7, currentPage: actualPage}">
+        <th scope="row align-middle text-center">
+          <div class="text-center">
+              <img class="img-fluid img-size" src="{{ product.image }}">
+          </div>          
+        </th>
+        <td class="align-middle text-center">{{ product.name }}</td>
+        <td class="align-middle text-center">{{ product.price }}</td>
+        <td class="align-middle text-center">
+          <i class="fa fa-edit" style="font-size:30px;color:green"></i>
+          <br><br>
+          <i class="fa fa-remove" style="font-size:30px;color:red"></i>
+        </td>
+      </tr>      
+    </tbody>
+    <!--Table body-->
+    <pagination-controls (pageChange)="actualPage = $event"></pagination-controls>
+  </table>
+  <!--Table-->
+
+</div>

@@ -1,0 +1,50 @@
+/*NAVBAR*/
+.navbar {
+	background-color: #fff !important;
+}
+.nav-side-left {
+    width: 15% !important;
+    margin-left: 5%;
+}
+.nav-side-right {
+    width: 15% !important;
+    margin-right: 5%;   
+}
+.search-icon {
+	margin-right: 5px;
+}
+.icon {
+    margin-right: 30px;
+}
+input.form-control.mr-sm-2 {
+	border: none;
+	border-radius: 0;
+	border-bottom: 1px solid grey;
+}
+.nav-link,
+.nav-link:hover {
+    color: #000;
+}
+.nav-item::after {
+  content:'';
+  display:block;
+  width:0px;height:2px;
+  background: #e3b4bc;
+  transition: 0.2s;
+}
+.nav-item:hover::after {
+  width:100%;
+}
+.nav-link {
+  padding:15px 5px;
+  transition:0.2s;
+}
+input:focus {
+    outline: 0;
+    outline: none;
+}
+nav.navbar.navbar-expand-md,
+nav.navbar.navbar-expand-md.fixed-top-sm.justify-content-between.flex-nowrap.navbar-light
+{
+    padding: 0;
+}

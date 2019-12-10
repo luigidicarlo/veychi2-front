@@ -1,25 +1,3 @@
-.title-container {
-    width: 50%; 
-    padding: 0; 
-    margin: 0 auto; 
-    border-radius: 20px;
-}
-
-.bg-yellow {
-    background-color: #fee086; 
-}
-
-.title-home {
-    text-align: center; 
-    color: #fff; 
-    padding: 0; 
-    margin: 0;
-}
-
-.card-container{
-    background-color: #fff;
-}
-
 .section-title {
     color: #212529;
     text-transform: uppercase;
@@ -37,7 +15,6 @@
 .section-title:hover {
     background-size: 100% 2px;
 }
-
 .bg-pink {
     background-color: #c4366d !important;
     border-color: #c4366d !important;

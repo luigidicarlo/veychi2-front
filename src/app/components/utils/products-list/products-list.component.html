@@ -15,9 +15,9 @@
   <div class="card shadow bg-white" *ngFor="let product of products | paginate: {itemsPerPage: 7, currentPage: actualPage}">
     <a [routerLink]="['/single-product', product.id]"><img class="img-fluid" src="{{ product.image }}" alt="..."></a>
     <div class="card-body">
-      <h5 class="card-title">{{ product.name }}</h5>
-      <p class="card-text">{{ product.description }}</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        <h5 class="card-title text-center">{{ product.name }}</h5>
+        <p class="card-text text-center">{{ product.price }} CLP</p>
+      <button type="submit" class="btn bg-pink btn-block text-uppercase mb-2">Añadir al carrito</button>
     </div>
   </div>
 </div>

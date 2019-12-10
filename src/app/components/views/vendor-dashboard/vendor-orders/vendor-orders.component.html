@@ -1,0 +1,49 @@
+<div class="table-responsive">
+  <br>
+  <!--Table-->
+  <table style="background: #fff;" class="table">
+
+    <!--Table head-->
+    <thead>
+      <tr style="background: #c4366d;">
+        <th class="th-lg text-white text-center">Imagen</th>
+        <th class="th-lg text-white text-center">Pedido</th>
+        <th class="th-lg text-white text-center">Artículo</th>
+        <th class="th-lg text-white text-center">Titular de facturación</th>
+        <th class="th-lg text-white text-center">Dirección de envío</th>
+        <th class="th-lg text-white text-center">Venta bruta</th>
+        <th class="th-lg text-white text-center">Comisión</th>
+        <th class="th-lg text-white text-center">Fecha</th>
+        <th class="th-lg text-white text-center">Acciones</th>
+      </tr>
+    </thead>
+    <!--Table head-->
+
+    <!--Table body-->
+    <tbody>
+      <tr *ngFor="let order of orders | paginate: {itemsPerPage: 7, currentPage: actualPage}">
+        <th scope="row align-middle text-center">
+          <div class="text-center">
+              <img class="img-fluid img-size" src="{{ order.image }}">
+          </div>          
+        </th>
+        <td class="align-middle text-center">{{ order.order }}</td>
+        <td class="align-middle text-center">{{ order.article }}</td>
+        <td class="align-middle text-center">{{ order.buyer }}</td>
+        <td class="align-middle text-center">{{ order.shippingAddress }}</td>
+        <td class="align-middle text-center">{{ order.amount }}</td>
+        <td class="align-middle text-center">{{ order.commission }}</td>
+        <td class="align-middle text-center">{{ order.date }}</td>
+        <td class="align-middle text-center">
+          <i class="fa fa-eye" style="font-size:30px;color:green"></i>
+          <br><br>
+          <i class="fa fa-remove" style="font-size:30px;color:red"></i>
+        </td>
+      </tr>      
+    </tbody>
+    <!--Table body-->
+    <pagination-controls (pageChange)="actualPage = $event"></pagination-controls>
+  </table>
+  <!--Table-->
+
+</div>
