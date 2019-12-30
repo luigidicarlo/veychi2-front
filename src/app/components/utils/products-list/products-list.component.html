@@ -13,11 +13,11 @@
 <br><br>
 <div class="card-columns">
   <div class="card shadow bg-white" *ngFor="let product of products | paginate: {itemsPerPage: 7, currentPage: actualPage}">
-    <a [routerLink]="['/single-product', product.id]"><img class="img-fluid" src="{{ product.image }}" alt="..."></a>
+    <a [routerLink]="['/single-product', product._id]"><img class="img-fluid" src="{{ product.images[0] }}" alt="..."></a>
     <div class="card-body">
         <h5 class="card-title text-center">{{ product.name }}</h5>
         <p class="card-text text-center">{{ product.price }} CLP</p>
-      <button type="submit" class="btn bg-pink btn-block text-uppercase mb-2">Añadir al carrito</button>
+      <button type="submit" class="btn bg-pink btn-block text-uppercase mb-2" (click)="saveCart(product)">Añadir al carrito</button>
     </div>
   </div>
 </div>

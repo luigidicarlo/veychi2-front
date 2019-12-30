@@ -18,7 +18,13 @@ import { ProductCategoryComponent } from './components/views/product-category/pr
 import { VendorRegisterComponent } from './components/views/vendor-register/vendor-register.component';
 import { VendorSettingsComponent } from './components/views/vendor-dashboard/vendor-settings/vendor-settings.component';
 import { VendorStatsComponent } from './components/views/vendor-dashboard/vendor-stats/vendor-stats.component';
-
+import { PasswordRecoveryComponent } from './components/views/password-recovery/password-recovery.component';
+import { ForgotPasswordComponent } from './components/views/forgot-password/forgot-password.component';
+import { AdminDashboardComponent } from './components/views/admin-dashboard/admin-dashboard.component';
+import { AdminCategoriesComponent } from './components/views/admin-dashboard/admin-categories/admin-categories.component';
+import { AdminHomeComponent } from './components/views/admin-dashboard/admin-home/admin-home.component';
+import { CategoriesComponent } from './components/views/admin-dashboard/categories/categories.component';
+import { VendorsRequestComponent } from './components/views/admin-dashboard/vendors-request/vendors-request.component';
 
 const routes: Routes = [
   {
@@ -74,6 +80,10 @@ const routes: Routes = [
         component: AddProductComponent
       },
       {
+        path: 'editar-producto/:id',
+        component: AddProductComponent
+      },
+      {
         path: 'pedidos',
         component: VendorOrdersComponent
       },
@@ -96,8 +106,41 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'categorias/:name',
+    path: 'categorias/:id',
     component: ProductCategoryComponent
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent
+  },
+  {
+    path: 'password-recovery/:token',
+    component: PasswordRecoveryComponent
+  },
+  {
+    path: 'admin-panel',
+    component: AdminDashboardComponent, children: [
+      {
+        path: '',
+        component: AdminHomeComponent
+      },
+      {
+        path: 'categorias',
+        component: CategoriesComponent
+      },
+      {
+        path: 'crear-categoria',
+        component: AdminCategoriesComponent
+      },
+      {
+        path: 'editar-categoria/:id',
+        component: AdminCategoriesComponent
+      },
+      {
+        path: 'solicitud-vendedores',
+        component: VendorsRequestComponent
+      }
+    ]
   }
 ];
 

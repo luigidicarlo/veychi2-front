@@ -25,8 +25,7 @@ a:focus {
     margin: 40px 0;
 }
 
-.wrapper {
-    display: flex;
+.wrapper {    
     width: 100%;
     align-items: stretch;
 }
@@ -38,14 +37,7 @@ a:focus {
     color: #fff;
   }
   
-.wrapper {
-      display: flex;
-      width: 100%;
-      align-items: stretch;
-  }
-  
-  #sidebar {
-      min-width: 250px;
+  #sidebar {      
       max-width: 250px;
       background: #c4366d;
       color: #fff;
@@ -61,11 +53,6 @@ a:focus {
       background: #c4366d;
       border-top: 2px solid #fff;
       border-bottom: 2px solid #fff;
-  }
-  
-  #sidebar ul.components {
-      padding: 20px 0;
-      border-bottom: 1px solid #47748b;
   }
   
   #sidebar ul p {
@@ -130,12 +117,22 @@ a:focus {
       color: #6b6b6b !important;
   }
 
-  .bg-purple {
-      background-color: #ab74bf;
+  .bg-pink {
+      background-color: #c4366d;
   }
 
-  ul.vendor-options li a{
+  nav ul li a i{
     color: #fff;
+  }
+
+  nav ul li {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+
+  .fa {
+    font-size: 1.4em;
+    margin-top: 10px;
   }
 /* ---------------------------------------------------
     CONTENT STYLE
@@ -152,12 +149,13 @@ a:focus {
     MEDIAQUERIES
 ----------------------------------------------------- */
 
-@media (max-width: 768px) {
-    #sidebar {
-        margin-left: -250px;
-    }
+@media (max-width: 768px) {    
     #sidebar.active {
         margin-left: 0;
+    }
+    .fa {
+      font-size: 1em;
+      margin-top: 10px;
     }
     #sidebarCollapse span {
         display: none;

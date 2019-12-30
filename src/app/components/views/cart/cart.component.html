@@ -16,27 +16,29 @@
                     <div class="py-2 text-uppercase">Precio</div>
                   </th>
                   <th scope="col" class="border-0">
-                    <div class="py-2 text-uppercase">Cantidad</div>
-                  </th>
-                  <th scope="col" class="border-0">
                     <div class="py-2 text-uppercase">Remover</div>
                   </th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of cart">
-                  <th scope="row" class="border-0">
-                    <div class="p-2">
-                      <img src="{{ item.product.image }}" alt="" width="70" class="img-fluid rounded shadow-sm">
-                      <div class="ml-3 d-inline-block align-middle">
-                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">{{ item.product.name }}</a></h5><span class="text-muted font-weight-normal font-italic d-block">Category: Watches</span>
+                <ng-container *ngIf="cart.length">
+                  <tr *ngFor="let product of cart; let i = index">
+                    <th scope="row" class="border-0">
+                      <div class="p-2">
+                        <img src="{{ product.images[0] }}" alt="" width="70" class="img-fluid rounded shadow-sm">
+                        <div class="ml-3 d-inline-block align-middle">
+                          <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">{{ product.name }}</a></h5><span class="text-muted font-weight-normal font-italic d-block">Category: Watches</span>
+                        </div>
                       </div>
-                    </div>
-                  </th>
-                  <td class="border-0 align-middle"><strong>{{ item.product.price }}$</strong></td>
-                  <td class="border-0 align-middle"><strong>{{ item.quantity }}</strong></td>
-                  <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
-                </tr>
+                    </th>
+                    <td class="border-0 align-middle"><strong>{{ product.price }} CLP</strong></td>
+                    <td class="border-0 align-middle"><a class="text-dark" (click)="deleteCartProduct(i)"><i class="fa fa-trash"></i></a></td>
+                  </tr>
+                </ng-container>
+                <br>
+                <ng-container *ngIf="!cart.length">
+                  <h3 class="text-center">No hay productos en el carrito</h3>
+                </ng-container>
               </tbody>
             </table>
           </div>

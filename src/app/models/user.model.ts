@@ -1,10 +1,10 @@
 export interface User{
     id: number;
     username: string;
-    names: string;
-    last_names: string;
+    fname: string;
+    lname: string;
     email: string;
     password: string;
     role: string;
-    image_id: string;
+    imageUrl: string;
 }

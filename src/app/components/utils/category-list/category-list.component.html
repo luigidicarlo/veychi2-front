@@ -7,7 +7,7 @@
     <div class="card" *ngFor="let category of categories">
       <div class="card-header bg-white" id="headingOne">
         <h2 class="mb-0">
-          <a class="btn btn-link" [routerLink]="['/categorias', category.name]">
+          <a class="btn btn-link" [routerLink]="['/categorias', category._id]">
             {{ category.name }}
           </a>
         </h2>

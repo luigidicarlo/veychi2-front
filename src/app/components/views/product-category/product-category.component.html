@@ -7,11 +7,11 @@
             </div>
             <br>
             <div class="card-columns">
-                <div class="card shadow bg-white" *ngFor="let p of product | paginate: {itemsPerPage: 7, currentPage: actualPage}">
-                    <img class="img-fluid" src="{{ p.image }}" alt="...">
+                <div class="card shadow bg-white" *ngFor="let product of products | paginate: {itemsPerPage: 7, currentPage: actualPage}">
+                    <img class="img-fluid" src="{{ product.images[0] }}" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title text-center">{{ p.name }}</h5>
-                        <p class="card-text text-center">{{ p.price }} CLP</p>
+                        <h5 class="card-title text-center">{{ product.name }}</h5>
+                        <p class="card-text text-center">{{ product.price }} CLP</p>
                         <button type="submit" class="btn bg-pink btn-block text-uppercase mb-2">Añadir al carrito</button>
                     </div>
                 </div>               

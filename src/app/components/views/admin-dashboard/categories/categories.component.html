@@ -1,0 +1,44 @@
+<div class="table-responsive">
+  <a routerLink="/admin-panel/crear-categoria" class="btn btn-primary text-right btn-add float-right ">
+    Crear categoría
+  </a>
+    <br>
+    <!--Table-->
+    <table style="background: #fff;" class="table">
+  
+      <!--Table head-->
+      <thead>
+        <tr style="background: #c4366d;">
+          <th class="th-lg text-white text-center">Nombre</th>
+          <th class="th-lg text-white text-center">Padre</th>
+          <th class="th-lg text-white text-center">Imagen</th>
+          <th class="th-lg text-white text-center">Acción</th>
+        </tr>
+      </thead>
+      <!--Table head-->
+  
+      <!--Table body-->
+      <tbody>
+        <tr *ngFor="let category of categories">          
+          <td class="align-middle text-center">{{ category.name }}</td>
+          <td class="align-middle text-center">
+            <span class="discount-type">
+              {{ category.parent.name }}
+            </span>
+          </td>
+          <td class="align-middle text-center">
+              <img src="{{ category.imageUrl }}" width="50px">
+          </td>
+          <td class="align-middle text-center">
+            <a class="btn btn-primary" [routerLink]="['/admin-panel/editar-categoria', category._id]">Editar</a>
+            <br><br>
+            <button class="btn btn-warning" (click)="onDelete(category._id)">Eliminar</button>
+          </td>
+        </tr>        
+      </tbody>
+      <!--Table body-->
+    </table>
+    <!--Table-->
+  
+</div>
+  

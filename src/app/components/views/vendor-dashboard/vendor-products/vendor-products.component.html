@@ -22,15 +22,15 @@
       <tr *ngFor="let product of products | paginate: {itemsPerPage: 7, currentPage: actualPage}">
         <th scope="row align-middle text-center">
           <div class="text-center">
-              <img class="img-fluid img-size" src="{{ product.image }}">
+              <img class="img-fluid img-size" src="{{ product.images[0] }}">
           </div>          
         </th>
         <td class="align-middle text-center">{{ product.name }}</td>
         <td class="align-middle text-center">{{ product.price }}</td>
         <td class="align-middle text-center">
-          <i class="fa fa-edit" style="font-size:30px;color:green"></i>
+          <i class="fa fa-edit" style="font-size:30px; color:green; cursor: pointer;" (click)="editProduct(product._id)"></i>
           <br><br>
-          <i class="fa fa-remove" style="font-size:30px;color:red"></i>
+          <i class="fa fa-remove" style="font-size:30px; color:red; cursor: pointer;" (click)="eraseProduct(product._id)"></i>
         </td>
       </tr>      
     </tbody>

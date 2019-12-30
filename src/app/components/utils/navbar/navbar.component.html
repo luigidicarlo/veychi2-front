@@ -9,13 +9,17 @@
     </form>
     <a href="/" class="navbar-brand mx-auto"><img src="https://veychi.com/wp-content/uploads/2018/10/logo-veychi-r.png" width="100" height="100" alt=""></a>
     <ul class="navbar-nav flex-row nav-side-right text-center mx">
-        <li class="nav-item icon">
+        <li class="nav-item icon" *ngIf="!auth.loggedIn">
             <i class="fa fa-user"></i>  
-            <a style="text-decoration: none; color: #000" routerLink="/login">login</a>
+            <a style="text-decoration: none; color: #000" routerLink="/login"> login</a>
+        </li>
+        <li class="nav-item icon" *ngIf="auth.loggedIn">
+            <i class="fa fa-user"></i>  
+            <a style="text-decoration: none; color: #000" routerLink="/login"> logout</a>
         </li>
         <li class="nav-item icon">
             <i class="fa fa-shopping-cart"></i>            
-            <a style="text-decoration: none; color: #000" routerLink="/cart">Carrito</a>
+            <a style="text-decoration: none; color: #000" routerLink="/cart"> Carrito</a>
         </li>
     </ul>               
 </nav>
@@ -28,16 +32,13 @@
             <li class="nav-item">
                 <a class="nav-link" routerLink="/contacto">Contacto</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/login">Login</a>
-            </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="!auth.loggedIn">
                 <a class="nav-link" routerLink="/register">Registro</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="auth.loggedIn && !userService.isVendor">
                 <a class="nav-link" routerLink="/registro-de-vendedores">Registro de vendedores</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="userService.isVendor">
                 <a class="nav-link" routerLink="/vendor-panel">Panel de vendedores</a>
             </li>
         </ul>

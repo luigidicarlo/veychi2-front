@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user.model';
+import { Response } from '../models/response.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,23 +11,25 @@ export class AuthService {
 
   user: User;
   loggedIn = false;
-  apiBase: 'http://localhost:3535';
+  //URI = 'http://localhost:3535';
+
+  URI = 'http://veychi-api.herokuapp.com';
 
   constructor(
     private http: HttpClient
   ) { }
 
-  login(user: {username: string, password: string}): Observable<string> {
-    return this.http.post<string>(
-      this.apiBase + '/login',
+  login(user: {username: string, password: string}): Observable<Response> {
+    return this.http.post<Response>(
+      this.URI + '/login',
       user,
       { headers: new HttpHeaders({ 'Content-Type': 'application/json' })}
     );
   }
 
-  getLoggedUser(token: string): Observable<User> {
-    return this.http.get<User>(
-      this.apiBase + '/users',
+  getLoggedUser(token: string): Observable<Response> {
+    return this.http.get<Response>(
+      this.URI + '/users',
       { headers: new HttpHeaders({ Authorization: token }) }
     );
   }

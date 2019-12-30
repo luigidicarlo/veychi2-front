@@ -7,7 +7,7 @@
         <!--Grid column-->
         <div class="col-md-6 mb-4">
 
-          <img src="{{ product.image }}" class="img-fluid" alt="">
+          <img src="{{ product.images[0] }}" class="img-fluid" alt="">
 
         </div>
         <!--Grid column-->
@@ -39,7 +39,7 @@
             <h1>{{ product.name }}</h1>
             <p class="lead font-weight-bold">Descripción</p>
 
-            <p>{{ product.description }}</p>
+            <p>{{ product.shortDescription }}</p>
 
             <form class="d-flex justify-content-left">
               <!-- Default input -->

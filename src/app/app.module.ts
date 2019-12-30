@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ChartsModule } from 'ng2-charts';
 
@@ -30,6 +31,14 @@ import { VendorRegisterComponent } from './components/views/vendor-register/vend
 import { FooterComponent } from './components/utils/footer/footer.component';
 import { VendorSettingsComponent } from './components/views/vendor-dashboard/vendor-settings/vendor-settings.component';
 import { VendorStatsComponent } from './components/views/vendor-dashboard/vendor-stats/vendor-stats.component';
+import { ForgotPasswordComponent } from './components/views/forgot-password/forgot-password.component';
+import { PasswordRecoveryComponent } from './components/views/password-recovery/password-recovery.component';
+import { AdminDashboardComponent } from './components/views/admin-dashboard/admin-dashboard.component';
+import { AdminCategoriesComponent } from './components/views/admin-dashboard/admin-categories/admin-categories.component';
+import { AdminHomeComponent } from './components/views/admin-dashboard/admin-home/admin-home.component';
+import { CategoriesComponent } from './components/views/admin-dashboard/categories/categories.component';
+import { EditCategoryComponent } from './components/views/admin-dashboard/edit-category/edit-category.component';
+import { VendorsRequestComponent } from './components/views/admin-dashboard/vendors-request/vendors-request.component';
 
 @NgModule({
   declarations: [
@@ -56,13 +65,22 @@ import { VendorStatsComponent } from './components/views/vendor-dashboard/vendor
     VendorRegisterComponent,
     FooterComponent,
     VendorSettingsComponent,
-    VendorStatsComponent
+    VendorStatsComponent,
+    ForgotPasswordComponent,
+    PasswordRecoveryComponent,
+    AdminDashboardComponent,
+    AdminCategoriesComponent,
+    AdminHomeComponent,
+    CategoriesComponent,
+    EditCategoryComponent,
+    VendorsRequestComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
     NgxPaginationModule,
     ChartsModule
   ],

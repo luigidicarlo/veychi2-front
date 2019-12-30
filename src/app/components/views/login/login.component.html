@@ -10,33 +10,34 @@
 
                 <!-- Demo content-->
                 <div class="container">
-                    <div class="row">
+                    <div class="row" *ngIf="!auth.loggedIn">
                         <div class="col-lg-10 col-xl-7 mx-auto">
                             <h3 class="display-4">Inicia sesión</h3>
                             <p class="text-muted mb-4">Ingresa a Veychi</p>
                             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                                 <div class="form-group mb-3">
-                                    <input type="email" placeholder="Correo" autofocus formControlName="username" class="form-control rounded-pill border-0 shadow-sm px-4">
+                                    <input type="text" placeholder="usuario" autofocus formControlName="username" class="form-control rounded-pill border-0 shadow-sm px-4">
                                 </div>
                                 <div class="form-group mb-3">
                                     <input type="password" placeholder="Contraseña" formControlName="password" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
                                 </div>
-                                <div class="custom-control custom-checkbox mb-3">
-                                    <input id="customCheck1" type="checkbox" checked class="custom-control-input">
-                                    <label for="customCheck1" class="custom-control-label">Recordar contraseña</label>
-                                </div>
-                                <button type="submit" class="btn bg-pink btn-block text-uppercase mb-2 rounded-pill shadow-sm">Iniciar sesión</button>
+                                <a routerLink="/forgot-password">Olvidé la contraseña</a>
+                                <button type="submit" class="btn bg-pink btn-block text-uppercase mb-2 rounded-pill shadow-sm" [disabled]="loginForm.invalid || submitted">Iniciar sesión</button>
+                                <small class="form-text text-danger"
+                                    *ngIf="error">
+                                    Ha ocurrido un error
+                                </small>
                             </form>
                         </div>
-                    </div><!--
+                    </div>
                     <div class="row" *ngIf="auth.loggedIn">
                         <div class="col-md-6 mx-auto">
                             <h1>Sesión iniciada</h1>
                             <a class="btn btn-primary" routerLink="/inicio">Volver a inicio</a>
                             <br>
-                            <a class="btn btn-primary" routerLink="" (click)="logout()">Volver a inicio</a>
+                            <a class="btn btn-primary mt-4" routerLink="" (click)="logout()">Cerrar sesión</a>
                         </div>
-                    </div>-->
+                    </div>
                 </div><!-- End -->
 
             </div>

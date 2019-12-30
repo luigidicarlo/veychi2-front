@@ -1,0 +1,32 @@
+<div class="container">
+    <form [formGroup]="categoryForm" (ngSubmit)="edit ? onEdit() : onSubmit()">
+        <div class="row">
+            <div class="col-md-8">
+                <small class="form-text text-danger"
+                    *ngIf="categoryForm.get('name').touched && categoryForm.get('name').invalid">
+                    Mínimo 3 caracteres
+                </small>
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Nombre de la categoría</label>
+                    <input type="text" class="form-control" id="name" [(ngModel)]="singleCategory.name" formControlName="name" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Padre</label>                    
+                    <select class="form-control" id="parent" [(ngModel)]="singleCategory.parent" formControlName="parent">
+                      <option>Ninguno</option>
+                      <option *ngFor="let category of categories" value="{{ category._id }}">{{ category.name }}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Imagen de la categoría</label>
+                    <input type="url" class="form-control" id="imageUrl" [(ngModel)]="singleCategory.imageUrl" formControlName="imageUrl" placeholder="">
+                </div>
+                <button type="submit" class="btn btn-primary" [disabled]="categoryForm.invalid || submitted">Guardar</button>
+                <small class="form-text text-danger"
+                    *ngIf="error">
+                    Ha ocurrido un error
+                </small>
+            </div>
+        </div>
+    </form>
+</div>

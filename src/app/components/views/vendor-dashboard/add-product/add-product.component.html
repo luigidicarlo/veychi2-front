@@ -1,45 +1,56 @@
 <div class="container">
-    <form>
+    <form [formGroup]="productForm" (ngSubmit)="edit ? onEdit() : onSubmit()">
         <div class="row">
             <div class="col-md-8">
                 <div class="form-group">
-                    <label for="formGroupExampleInput">Título del producto</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Titulo...">
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Another label</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+                    <label for="formGroupExampleInput">Nombre del producto</label>
+                    <input type="text" class="form-control" id="name" [(ngModel)]="singleProduct.name" formControlName="name" placeholder="">
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="Price">Precio (CLP)</label>
-                        <input type="text" class="form-control" id="Price" placeholder="Ej: 10000">
+                        <label for="Precio">Precio (CLP)</label>
+                        <input type="text" class="form-control" id="description" [(ngModel)]="singleProduct.price" formControlName="price" placeholder="Ej: 10000">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="OfferPrice">Oferta (CLP)</label>
-                        <input type="text" class="form-control" id="OfferPrice" placeholder="Ej: 9500">
+                        <label for="Descuento">Descuento (%)</label>
+                        <input type="text" class="form-control" id="shortDescription" [(ngModel)]="singleProduct.discount" formControlName="discount" placeholder="Ej: 20">
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Descripción breve</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Descripción completa</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea class="form-control" id="description" [(ngModel)]="singleProduct.description" formControlName="description"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Publicar</button>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Descripción breve</label>
+                    <textarea class="form-control" id="shortDescription" [(ngModel)]="singleProduct.shortDescription" formControlName="shortDescription"></textarea>
+                </div>                                
+                <div class="form-group">
+                    <label for="formGroupExampleInput">URL de imagen</label>
+                    <input type="text" class="form-control" id="images" formControlName="images" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Etiquetas de producto</label>
+                    <input type="text" class="form-control" id="tags" formControlName="tags" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Categoría</label>
+                    <select id="category" [(ngModel)]="singleProduct.category" formControlName="category">
+                        <option *ngFor="let category of categories" value="{{ category._id }}">{{ category.name }}</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid || submitted">Publicar</button>
+                <small class="form-text text-danger"
+                    *ngIf="error">
+                    Ha ocurrido un error
+                </small>
             </div>
             <div class="col-md-4">
                 <div style="border: 1px solid grey">
                     <img class="img-fluid" src="https://veychi.com/wp-content/plugins/wc-frontend-manager/includes/libs/upload/images/Placeholder.png">
                 </div>     
                 <br>           
-                <button type="submit" class="btn btn-primary text-center">Subir imagen</button>
+                <button type="submit" class="btn btn-primary text-center">Subir imagen</button>   
             </div>
         </div>
-    </form>
-    <form>
-        
-    </form>
+    </form>    
 </div>
