@@ -16,7 +16,7 @@ export class AdminCategoriesComponent implements OnInit {
   categoryForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     parent: new FormControl('', Validators.required),
-    imageUrl: new FormControl('', Validators.required)
+    imageUrl: new FormControl('')
   });
 
   submitted = false;
@@ -25,7 +25,7 @@ export class AdminCategoriesComponent implements OnInit {
   edit: boolean = false;
   singleCategory: any = {};
   categories: any[] = [];
-
+  noneCategory = "0";
   category: any = {};
 
   constructor(private categoryService: CategoryService, private auth: AuthService,
@@ -78,7 +78,7 @@ export class AdminCategoriesComponent implements OnInit {
   fillFields() {
     this.category = {
       name: this.categoryForm.get('name').value as string,
-      parent: this.categoryForm.get('parent').value as string,
+      parent: this.categoryForm.get('parent').value == "0" ? null : this.categoryForm.get('parent').value as string,
       imageUrl: this.categoryForm.get('imageUrl').value as string
     };
   }

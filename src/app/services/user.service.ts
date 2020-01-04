@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { User } from '../models/user.model';
 import { Response } from '../models/response.model';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { Params } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  URI = environment.apiBase;
+
+  URI = 'http://localhost:3535';
+
+  //URI = 'http://veychi-api.herokuapp.com';
   isVendor = false;
 
   constructor(private http: HttpClient) { }

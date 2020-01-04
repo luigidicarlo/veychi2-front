@@ -22,8 +22,11 @@
         <tr *ngFor="let category of categories">          
           <td class="align-middle text-center">{{ category.name }}</td>
           <td class="align-middle text-center">
-            <span class="discount-type">
+            <span class="discount-type" *ngIf="category.parent != null">
               {{ category.parent.name }}
+            </span>
+            <span class="discount-type" style="color: red" *ngIf="category.parent == null">
+              Ninguno
             </span>
           </td>
           <td class="align-middle text-center">

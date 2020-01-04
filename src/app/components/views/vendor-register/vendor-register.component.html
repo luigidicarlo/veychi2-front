@@ -7,7 +7,7 @@
                 <br><br>
                 <form [formGroup]="vendorForm" (ngSubmit)="onSubmit()">
                     <small class="form-text text-danger"
-                        *ngIf="vendorForm.get('name').touched && registerForm.get('name').invalid">
+                        *ngIf="vendorForm.get('name').touched && vendorForm.get('name').invalid">
                         Debe ingresar su nombre apellido
                     </small>
                     <div class="form-group mb-3">
@@ -15,7 +15,7 @@
                         <input id="inputEmail" type="text" autofocus formControlName="name" class="form-control rounded-pill border-0 shadow-sm px-4">
                     </div>
                     <small class="form-text text-danger"
-                        *ngIf="vendorForm.get('description').touched && registerForm.get('description').invalid">
+                        *ngIf="vendorForm.get('description').touched && vendorForm.get('description').invalid">
                         Debe ingresar su nombre apellido
                     </small>
                     <div class="form-group mb-3">
@@ -23,7 +23,7 @@
                         <input type="text" formControlName="description" class="form-control rounded-pill border-0 shadow-sm px-4">                    
                     </div>
                     <small class="form-text text-danger"
-                        *ngIf="vendorForm.get('rut').touched && registerForm.get('rut').invalid">
+                        *ngIf="vendorForm.get('rut').touched && vendorForm.get('rut').invalid">
                         Debe ingresar su nombre apellido
                     </small>
                     <div class="form-group mb-3">
@@ -31,7 +31,7 @@
                         <input type="text" formControlName="rut" class="form-control rounded-pill border-0 shadow-sm px-4">
                     </div>
                     <small class="form-text text-danger"
-                        *ngIf="vendorForm.get('activity').touched && registerForm.get('activity').invalid">
+                        *ngIf="vendorForm.get('activity').touched && vendorForm.get('activity').invalid">
                         Debe ingresar su nombre apellido
                     </small>
                     <div class="form-group mb-3">
@@ -39,8 +39,8 @@
                         <input type="text" formControlName="activity" class="form-control rounded-pill border-0 shadow-sm px-4">
                     </div>
                     <div class="custom-control custom-checkbox mb-3">
-                        <input id="customCheck1" type="checkbox" checked class="custom-control-input">
-                        <label for="customCheck1" formControlName="tc" checked class="custom-control-label">Acepto los términos y condiciones</label>
+                        <input id="customCheck1" formControlName="tc" type="checkbox" checked class="custom-control-input">
+                        <label for="customCheck1" class="custom-control-label">Acepto los términos y condiciones</label>
                     </div>
                     <button type="submit" class="btn bg-pink btn-block text-uppercase mb-2 rounded-pill shadow-sm" [disabled]="vendorForm.invalid || submitted">Enviar solicitud</button>
                     <small class="form-text text-danger"

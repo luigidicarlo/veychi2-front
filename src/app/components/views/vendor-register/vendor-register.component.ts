@@ -15,7 +15,7 @@ export class VendorRegisterComponent implements OnInit {
   vendorForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.pattern('^[$0-9a-zA-ZñÑáéíóúÁÉÍÓÚüÜ\' ]+$'), Validators.minLength(8)]),
     description: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    rut: new FormControl('', Validators.required),
+    rut: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+[-|‐]{1}[0-9kK]$'), Validators.minLength(10)]),
     activity: new FormControl('', [Validators.required, Validators.minLength(8)]),
     tc: new FormControl('', Validators.requiredTrue)
   });
