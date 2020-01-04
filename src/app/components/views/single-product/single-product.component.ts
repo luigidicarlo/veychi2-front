@@ -13,7 +13,7 @@ import { ProductService } from 'src/app/services/product.service';
 export class SingleProductComponent implements OnInit {
   
   product: any; 
-
+  productImages: any;
   constructor(private activatedRoute: ActivatedRoute, private productService: ProductService) { }
 
   ngOnInit() {
@@ -27,6 +27,13 @@ export class SingleProductComponent implements OnInit {
         console.log(res);
         if(res.ok) {
           this.product = res.data;
+          this.productImages = this.product.images.map((item) => {
+            return {
+              image: item,
+              thumbImage: item
+            };
+          });
+          console.log(this.productImages);
         }
       },
       err => console.log(err)

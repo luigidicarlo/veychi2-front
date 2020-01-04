@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ChartsModule } from 'ng2-charts';
+import { NgImageSliderModule } from 'ng-image-slider';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -82,7 +83,8 @@ import { VendorsRequestComponent } from './components/views/admin-dashboard/vend
     FormsModule,
     HttpClientModule,
     NgxPaginationModule,
-    ChartsModule
+    ChartsModule,
+    NgImageSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
