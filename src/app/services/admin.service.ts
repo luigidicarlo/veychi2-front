@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Response } from '../models/response.model';
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
-
-  URI = 'http://localhost:3535';
-
- // URI = 'http://veychi-api.herokuapp.com';
+  URI = environment.apiBase;
 
   constructor(private http: HttpClient) { }
 

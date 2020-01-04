@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user.model';
 import { Response } from '../models/response.model';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,8 @@ export class AuthService {
 
   user: User;
   loggedIn = false;
-  URI = 'http://localhost:3535';
 
-  //URI = 'http://veychi-api.herokuapp.com';
+  URI = environment.apiBase;
 
   constructor(
     private http: HttpClient
