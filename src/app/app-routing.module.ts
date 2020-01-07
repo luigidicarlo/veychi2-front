@@ -110,6 +110,10 @@ const routes: Routes = [
     component: ProductCategoryComponent
   },
   {
+    path: 'vendor-products/:id',
+    component: ProductCategoryComponent
+  },
+  {
     path: 'forgot-password',
     component: ForgotPasswordComponent
   },

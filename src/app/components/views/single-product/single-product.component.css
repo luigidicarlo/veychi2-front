@@ -28,3 +28,21 @@ ul {
     color: #000;
     font-weight: 700
 }
+
+.section-title {
+    color: #212529;
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 30;
+    font-family: oswald;
+    text-decoration: none;
+    background-image: linear-gradient(to right, #c4366d, #c4366d);
+    background-position: bottom left;
+    background-repeat: no-repeat;
+    background-size: 50% 2px;
+    transition: background-size .5s ease;
+}
+
+.section-title:hover {
+    background-size: 100% 2px;
+}

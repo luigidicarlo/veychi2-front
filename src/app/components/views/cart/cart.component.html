@@ -69,11 +69,11 @@
           <div class="p-4">
             <p class="font-italic mb-4">El envío y los costos adicionales son calculados en base a los datos ingresados</p>
             <ul class="list-unstyled mb-4">
-              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Subtotal de la orden</strong><strong>$390.00</strong></li>
-              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Gastos de envío</strong><strong>$10.00</strong></li>
-              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Impuesto</strong><strong>$0.00</strong></li>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Subtotal de la orden</strong><strong>{{ subtotal }} CLP</strong></li>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Gastos de envío</strong><strong>{{ envio }} CLP</strong></li>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Impuesto</strong><strong>{{ tax }} CLP</strong></li>
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                <h5 class="font-weight-bold">$400.00</h5>
+                <h5 class="font-weight-bold">{{ total }} CLP</h5>
               </li>
             </ul><a href="/checkout" class="btn btn-dark rounded-pill py-2 btn-block">Proceder a pagar</a>
           </div>

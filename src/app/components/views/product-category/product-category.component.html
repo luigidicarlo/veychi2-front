@@ -1,23 +1,47 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-9">
-            <br>
-            <div class="row">
-                <h1 class="section-title text-center">Categoría</h1>
+        <ng-container *ngIf="storeID == null">
+            <div class="col-md-9">
+                <br>
+                <div class="row">
+                    <h1 class="section-title text-center">Categoría</h1>
+                </div>
+                <br>
+                <div class="card-columns">
+                    <div class="card shadow bg-white" *ngFor="let product of products | paginate: {itemsPerPage: 7, currentPage: actualPage}">
+                        <a [routerLink]="['/single-product', product._id]"><img class="img-fluid" src="{{ product.images[0] }}" alt="..."></a>
+                        <div class="card-body">
+                            <h5 class="card-title text-center">{{ product.name }}</h5>
+                            <p class="card-text text-center">{{ product.price }} CLP</p>
+                            <button type="submit" class="btn bg-pink btn-block text-uppercase mb-2"[routerLink]="['/single-product', product._id]">Ver producto</button>
+                        </div>
+                    </div>               
+                </div>
+                <pagination-controls (pageChange)="actualPage = $event"></pagination-controls>
             </div>
-            <br>
-            <div class="card-columns">
-                <div class="card shadow bg-white" *ngFor="let product of products | paginate: {itemsPerPage: 7, currentPage: actualPage}">
-                    <img class="img-fluid" src="{{ product.images[0] }}" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">{{ product.name }}</h5>
-                        <p class="card-text text-center">{{ product.price }} CLP</p>
-                        <button type="submit" class="btn bg-pink btn-block text-uppercase mb-2">Añadir al carrito</button>
-                    </div>
-                </div>               
+        </ng-container>
+        <ng-container *ngIf="storeID != null">
+            <div class="col-md-9">
+                <br>
+                <div class="row" *ngIf="products.length">
+                    <h1 class="section-title text-center">{{ products[0].store.name }}</h1>
+                </div>
+                <br>
+                <div class="card-columns">
+                    <ng-container *ngFor="let product of products | paginate: {itemsPerPage: 7, currentPage: actualPage}">
+                        <div class="card shadow bg-white" *ngIf="product.store._id == storeID">
+                            <a [routerLink]="['/single-product', product._id]"><img class="img-fluid" src="{{ product.images[0] }}" alt="..."></a>
+                            <div class="card-body">
+                                <h5 class="card-title text-center">{{ product.name }}</h5>
+                                <p class="card-text text-center">{{ product.price }} CLP</p>
+                                <button type="submit" class="btn bg-pink btn-block text-uppercase mb-2" [routerLink]="['/single-product', product._id]">Ver producto</button>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <pagination-controls (pageChange)="actualPage = $event"></pagination-controls>
             </div>
-            <pagination-controls (pageChange)="actualPage = $event"></pagination-controls>
-        </div>    
+        </ng-container>
         <div class="col-md-3">
             <app-category-list></app-category-list>
         </div>

@@ -1,36 +1,54 @@
 <div class="" *ngIf="auth.loggedIn && userService.isVendor">  
 
     <nav class="navbar navbar-expand-lg navbar-light bg-pink">
-        <ul class="list-unstyled components d-flex mx-auto">            
-            <li>
-                <a routerLink="/vendor-panel">
+        <ul class="list-unstyled components d-flex mx-auto my-auto">            
+            <li class="dropdown">
+                <a class="dropbtn" routerLink="/vendor-panel">
                     <i class="fa fa-home"></i>                    
-                </a>                
+                </a>
+                <div class="dropdown-content">
+                    <a routerLink="/vendor-panel">Resumen</a>                    
+                </div>            
             </li>           
-            <li>
-                <a routerLink="/vendor-panel/productos" class="">
+            <li class="dropdown">
+                <a class="dropbtn" routerLink="/vendor-panel/productos" class="">
                     <i class="fa fa-cubes"></i>                    
-                </a>                
+                </a>
+                <div class="dropdown-content">
+                    <a routerLink="/vendor-panel/productos">Productos</a>                    
+                </div>
             </li>
-            <li>
-                <a routerLink="/vendor-panel/pedidos" class="">
+            <li class="dropdown">
+                <a class="dropbtn" routerLink="/vendor-panel/pedidos" class="">
                     <i class="fa fa-shopping-cart"></i>                    
-                </a>                
+                </a>
+                <div class="dropdown-content">
+                    <a routerLink="/vendor-panel/pedidos">Pedidos</a>                    
+                </div>
             </li>
-            <li>
-                <a routerLink="/vendor-panel/cupones" class="">
+            <li class="dropdown">
+                <a class="dropbtn" routerLink="/vendor-panel/cupones" class="">
                     <i class="fa fa-gift"></i>                    
-                </a>                
+                </a>
+                <div class="dropdown-content">
+                    <a routerLink="/vendor-panel/cupones">Cupones</a>                    
+                </div>
             </li>
-            <li>
-                <a routerLink="/vendor-panel/estadisticas" class="">
+            <li class="dropdown">
+                <a class="dropbtn" routerLink="/vendor-panel/estadisticas" class="">
                     <i class="fa fa-pie-chart"></i>                    
-                </a>                
+                </a>
+                <div class="dropdown-content">
+                    <a routerLink="/vendor-panel/estadisticas">Estadísticas</a>                    
+                </div>
             </li>
-            <li>
-                <a routerLink="/vendor-panel/ajustes" class="">
+            <li class="dropdown">
+                <a class="dropbtn" routerLink="/vendor-panel/ajustes" class="">
                     <i class="fa fa-cogs"></i>                    
                 </a>
+                <div class="dropdown-content">
+                    <a routerLink="/vendor-panel/ajustes">Ajustes</a>                    
+                </div>
             </li>            
         </ul>   
     </nav>

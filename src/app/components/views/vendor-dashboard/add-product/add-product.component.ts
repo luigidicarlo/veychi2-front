@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Response } from '../../../../models/response.model';
+
 import { ProductService } from '../../../../services/product.service';
 import { CategoryService } from '../../../../services/category.service';
 import { AuthService } from '../../../../services/auth.service';
@@ -45,8 +46,13 @@ export class AddProductComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    const tag = this.productForm.get('tags').value;
-    const tagsSplit = tag.split(" ", 3);
+    const tagtext = this.productForm.get('tags').value;
+    console.log(tagtext);
+    let tagSplit = [];
+    tagSplit = tagtext.map(item => {
+        return item.value;
+    });
+    console.log(tagSplit);
     const image = this.productForm.get('images').value;
     const imageSplit = image.split(" ", 3);
     const product = {
@@ -56,7 +62,7 @@ export class AddProductComponent implements OnInit {
       description: this.productForm.get('description').value as string,
       shortDescription: this.productForm.get('shortDescription').value as string,
       images: imageSplit,
-      tags: tagsSplit,
+      tags: tagSplit,
       category: this.productForm.get('category').value as string
     };
 
@@ -79,6 +85,12 @@ export class AddProductComponent implements OnInit {
 
   onEdit() {
     this.submitted = true;
+    const tagtext = this.productForm.get('tags').value;
+    console.log(tagtext);
+    let tagSplit = [];
+    tagSplit = tagtext.map(item => {
+        return item.value;
+    });
     const product = {
       name: this.productForm.get('name').value as string,
       price: this.productForm.get('price').value as number,
@@ -86,7 +98,7 @@ export class AddProductComponent implements OnInit {
       description: this.productForm.get('description').value as string,
       shortDescription: this.productForm.get('shortDescription').value as string,
       images: this.singleProduct.images,
-      tags: this.singleProduct.tags,
+      tags: tagSplit,
       category: this.productForm.get('category').value as string
     };
     console.log("Editando...");

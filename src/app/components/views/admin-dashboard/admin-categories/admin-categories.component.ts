@@ -56,6 +56,7 @@ export class AdminCategoriesComponent implements OnInit {
   }
 
   onEdit() {
+    this.submitted = true;
     this.fillFields();
     console.log(this.category);
     console.log("Editando...");

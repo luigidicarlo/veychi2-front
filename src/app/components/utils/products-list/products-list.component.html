@@ -17,7 +17,7 @@
     <div class="card-body">
         <h5 class="card-title text-center">{{ product.name }}</h5>
         <p class="card-text text-center">{{ product.price }} CLP</p>
-      <button type="submit" class="btn bg-pink btn-block text-uppercase mb-2" (click)="saveCart(product)">Añadir al carrito</button>
+      <a type="submit" class="btn bg-pink btn-block text-uppercase mb-2" [routerLink]="['/single-product', product._id]">Ver producto</a>
     </div>
   </div>
 </div>

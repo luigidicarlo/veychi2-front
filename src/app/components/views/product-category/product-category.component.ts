@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 import { Product } from 'src/app/models/product.model';
 import { CategoryService } from '../../../services/category.service';
+import { ProductService } from '../../../services/product.service';
 import { Response } from '../../../models/response.model';
 
 @Component({
@@ -11,12 +12,13 @@ import { Response } from '../../../models/response.model';
 })
 export class ProductCategoryComponent implements OnInit {
 
-  products: Product[] = []   
+  products: Product[] = [];
+  storeID = null;
 
   actualPage: number = 1;
   
   constructor(private activatedRoute: ActivatedRoute, private categoryService: CategoryService,
-  private router: Router) {
+  private router: Router, private productService: ProductService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
@@ -25,16 +27,31 @@ export class ProductCategoryComponent implements OnInit {
   }
 
   showProducts() {
-    const params = this.activatedRoute.snapshot.params;
-    this.categoryService.getCategoryProduct(params.id).subscribe(
-      (res: Response) => {
-        console.log(res);
-        if(res.ok) {
-          this.products = res.data;
-        }
-      },
-      err => console.log(err)
-    );
+    if(this.router.url.includes("categorias")) {
+      console.log("CATEGORÍAS");
+      const params = this.activatedRoute.snapshot.params;
+      this.categoryService.getCategoryProduct(params.id).subscribe(
+        (res: Response) => {
+          console.log(res);
+          if(res.ok) {
+            this.products = res.data;
+          }
+        },
+        err => console.log(err)
+      );  
+    } else if(this.router.url.includes("vendor-products")) {
+      console.log("TIENDA");
+      this.storeID = this.activatedRoute.snapshot.params.id;
+      this.productService.getProducts().subscribe(
+        (res: Response) => {
+          if(res.ok) {
+            this.products = res.data
+            console.log(this.products);
+          }        
+        },
+        err => console.log(err)
+      );
+    }
   }
 
 }

@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ChartsModule } from 'ng2-charts';
 import { NgImageSliderModule } from 'ng-image-slider';
+import { TagInputModule } from 'ngx-chips';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -84,7 +85,8 @@ import { VendorsRequestComponent } from './components/views/admin-dashboard/vend
     HttpClientModule,
     NgxPaginationModule,
     ChartsModule,
-    NgImageSliderModule
+    NgImageSliderModule,
+    TagInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

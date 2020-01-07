@@ -29,15 +29,25 @@
                     <input type="text" class="form-control" id="images" formControlName="images" placeholder="">
                 </div>
                 <div class="form-group">
-                    <label for="formGroupExampleInput">Etiquetas de producto</label>
-                    <input type="text" class="form-control" id="tags" formControlName="tags" placeholder="">
+                    <label for="formGroupExampleInput">Tags (Etiquetas de producto)</label>
+                    <tag-input formControlName="tags" [(ngModel)]="singleProduct.tags" [displayBy]="'value'" [editable]='true' placeholder="Ingrese un tag" secondaryPlaceholder="Ingrese un tag"></tag-input>
                 </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput">Categoría</label>
-                    <select id="category" [(ngModel)]="singleProduct.category" formControlName="category">
-                        <option *ngFor="let category of categories" value="{{ category._id }}">{{ category.name }}</option>
-                    </select>
-                </div>
+                <ng-container *ngIf="edit">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Categoría</label>
+                        <select class="form-control" id="category" [(ngModel)]="singleProduct.category._id" formControlName="category">
+                            <option *ngFor="let category of categories" value="{{ category._id }}">{{ category.name }}</option>
+                        </select>
+                    </div>                    
+                </ng-container>
+                <ng-container *ngIf="!edit">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Categoría</label>
+                        <select class="form-control" id="category" formControlName="category">
+                            <option *ngFor="let category of categories" value="{{ category._id }}">{{ category.name }}</option>
+                        </select>
+                    </div>                    
+                </ng-container>
                 <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid || submitted">Publicar</button>
                 <small class="form-text text-danger"
                     *ngIf="error">
@@ -54,3 +64,4 @@
         </div>
     </form>    
 </div>
+<br><br><br>

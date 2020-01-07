@@ -13,6 +13,11 @@ export class CartComponent implements OnInit {
 
   cart: any[] = [];
 
+  subtotal: number = 0;
+  envio: number = 0;
+  tax: number = 0;
+  total: number = 0;
+
   ngOnInit() {
     this.getCartProducts();
   }
@@ -20,6 +25,15 @@ export class CartComponent implements OnInit {
   getCartProducts() {
     this.cart = JSON.parse(this.cartService.getCart());    
     console.log(this.cart);
+    this.getTotal();
+  }
+
+  getTotal() {
+    this.subtotal = 0;
+    this.cart.forEach((item) => {
+      this.subtotal += item.price;      
+    });
+    this.total = this.subtotal + this.envio + this.tax;
   }
 
   async deleteCartProduct(index: number) {    
