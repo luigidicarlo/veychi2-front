@@ -31,6 +31,8 @@ export class AddProductComponent implements OnInit {
   singleProduct: any = {};
   categories: any[] = [];
 
+  selectedImage: File = null;
+
   constructor(private productService: ProductService, private categoryService: CategoryService,
     private auth: AuthService, private router: Router, private activedRoute: ActivatedRoute) { }
 
@@ -140,6 +142,20 @@ export class AddProductComponent implements OnInit {
       },
       err => console.log(err)
     )
+  }
+
+  onUpload(event) {
+    console.log(event.target.files[0]);
+    this.selectedImage = <File>event.target.files[0];
+    const formData = new FormData();
+    formData.append('images', this.selectedImage);
+    console.log(formData);
+    this.productService.sendFile(formData, this.token).subscribe(
+      (res: Response) => {
+        console.log(res);
+      },
+      err => console.log(err)
+    );
   }
 
 }

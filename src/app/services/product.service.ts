@@ -33,4 +33,8 @@ export class ProductService {
   deleteProduct(id: string, token): Observable<Response> {
     return this.http.delete<Response>(`${this.URI}/products/${id}`, { headers: new HttpHeaders({ Authorization: token }) });
   }
+  
+  sendFile(file, token): Observable<Response> {
+    return this.http.post<Response>(`${this.URI}/media`, file, { headers: new HttpHeaders({ Authorization: token }) });
+  }
 }

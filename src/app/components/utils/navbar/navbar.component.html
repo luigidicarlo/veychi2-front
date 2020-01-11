@@ -1,13 +1,14 @@
 <nav class="navbar navbar-expand-md fixed-top-sm justify-content-between flex-nowrap navbar-light">     
-    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbar2">
+    <button class="navbar-toggler ml-4" type="button" data-toggle="collapse" data-target="#navbar2">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <form class="form-inline d-none d-md-block nav-side-left">
-        <i class="fa fa-search search-icon"></i>
-        <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-        <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-    </form>
-    <a href="/" class="navbar-brand mx-auto"><img src="https://veychi.com/wp-content/uploads/2018/10/logo-veychi-r.png" width="100" height="100" alt=""></a>
+    <a routerLink="/" class="navbar-brand nav-side-left"><img src="https://veychi.com/wp-content/uploads/2018/10/logo-veychi-r.png" width="100" height="100" alt=""></a>
+    <div class="input-group w-50 pr-4 d-none d-md-flex">      
+      <input type="text" class="form-control" placeholder="Buscar...">
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+      </div>
+    </div>    
     <ul class="navbar-nav flex-row nav-side-right text-center mx">
         <li class="nav-item icon" *ngIf="!auth.loggedIn">
             <i class="fa fa-user"></i>  
@@ -24,22 +25,38 @@
     </ul>               
 </nav>
 <nav class="navbar navbar-expand-md">
-    <div class="navbar-collapse collapse pt-2 pt-md-0" id="navbar2">
+    <div class="navbar-collapse collapse pt-2 pt-md-0 background-nav2" id="navbar2">
         <ul class="navbar-nav mx-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-caret-right mr-2"></i>Categorías
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ng-container *ngFor="let category of categories">
+                        <a class="dropdown-item" [routerLink]="['/categorias', category._id]">{{ category.name }}</a>    
+                    </ng-container>                    
+                </div>
+            </li>            
             <li class="nav-item active">
-                <a class="nav-link" routerLink="/">Inicio</a>
+                <a class="nav-link" routerLink="/"><i class="fa fa-caret-right mr-2"></i>Mi cuenta</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/"><i class="fa fa-caret-right mr-2"></i>Cómo comprar</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/"><i class="fa fa-caret-right mr-2"></i>Cómo vender</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" routerLink="/contacto">Contacto</a>
+                <a class="nav-link" routerLink="/contacto"><i class="fa fa-caret-right mr-2"></i>Contacto</a>
             </li>
             <li class="nav-item" *ngIf="!auth.loggedIn">
-                <a class="nav-link" routerLink="/register">Registro</a>
+                <a class="nav-link" routerLink="/register"><i class="fa fa-caret-right mr-2"></i>Registro</a>
             </li>
             <li class="nav-item" *ngIf="auth.loggedIn && !userService.isVendor">
-                <a class="nav-link" routerLink="/registro-de-vendedores">Registro de vendedores</a>
+                <a class="nav-link" routerLink="/registro-de-vendedores"><i class="fa fa-caret-right mr-2"></i>Registro de vendedores</a>
             </li>
             <li class="nav-item" *ngIf="userService.isVendor">
-                <a class="nav-link" routerLink="/vendor-panel">Panel de vendedores</a>
+                <a class="nav-link" routerLink="/vendor-panel"><i class="fa fa-caret-right mr-2"></i>Panel de vendedores</a>
             </li>
         </ul>
     </div>

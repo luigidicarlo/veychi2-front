@@ -23,7 +23,7 @@ input.form-control.mr-sm-2 {
 }
 .nav-link,
 .nav-link:hover {
-    color: #000;
+    color: #fff;
 }
 .nav-item::after {
   content:'';
@@ -47,4 +47,25 @@ nav.navbar.navbar-expand-md,
 nav.navbar.navbar-expand-md.fixed-top-sm.justify-content-between.flex-nowrap.navbar-light
 {
     padding: 0;
+}
+
+.input-group-text {
+  background-color: #c4366d;
+  color: #fff;
+}
+
+.background-nav2 {
+  background-color: #c4366d;
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .background-nav2 {
+    background-color: #fff;
+    color: #000;
+  }
+  .nav-link,
+  .nav-link:hover {
+    color: #000;
+  }
 }
