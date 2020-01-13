@@ -12,8 +12,9 @@ export class VendorsRequestComponent implements OnInit {
 
   token: any = '';
   vendors: any;
+  actualPage: number = 1;
 
-  constructor(private auth: AuthService, private adminService: AdminService) { }
+  constructor(public auth: AuthService, public adminService: AdminService) { }
 
   ngOnInit() {
     this.token = this.auth.loadSession();

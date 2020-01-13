@@ -12,7 +12,7 @@ export class VendorDashboardComponent implements OnInit {
   store: any = {};
   token: any = "";
 
-  constructor(private userService: UserService, private auth: AuthService) { }
+  constructor(public userService: UserService, public auth: AuthService) { }
 
   ngOnInit() {
   	this.token = this.auth.loadSession();

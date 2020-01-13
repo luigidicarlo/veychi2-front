@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
   error = false;
   msg = '';
 
-  constructor(private userService: UserService) { }
+  constructor(public userService: UserService) { }
 
   ngOnInit() {
   }

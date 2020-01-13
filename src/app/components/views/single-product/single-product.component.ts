@@ -16,8 +16,8 @@ export class SingleProductComponent implements OnInit {
   product: any;
   relatedProducts: any;
   productImages: any;
-  constructor(private activatedRoute: ActivatedRoute, private productService: ProductService,
-  private categoryService: CategoryService, private router: Router, private cart: CartService) { 
+  constructor(public activatedRoute: ActivatedRoute, public productService: ProductService,
+  public categoryService: CategoryService, public router: Router, public cart: CartService) { 
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Coupon } from 'src/app/models/coupon.model';
+import { Router } from '@angular/router';
+import { Response } from '../../../../models/response.model';
+import { CouponService } from '../../../../services/coupon.service';
+import { AuthService } from '../../../../services/auth.service';
+
 
 @Component({
   selector: 'app-vendor-coupons',
@@ -8,49 +12,44 @@ import { Coupon } from 'src/app/models/coupon.model';
 })
 export class VendorCouponsComponent implements OnInit {
 
-  coupons: Coupon[] = [
-    {
-      code: '#1234',
-      couponType: 'Porcentaje',
-      quantity: 50,
-      useLimit: 10,
-      dateExpiry: '10/05/2020'
-    },
-    {
-      code: '#2345',
-      couponType: 'Porcentaje',
-      quantity: 30,
-      useLimit: 10,
-      dateExpiry: '-'
-    },
-    {
-      code: '#3467',
-      couponType: 'Cantidad',
-      quantity: 30000,
-      useLimit: 0,
-      dateExpiry: '25/09/2020'
-    },
-    {
-      code: '#5789',
-      couponType: 'Porcentaje',
-      quantity: 35,
-      useLimit: 1,
-      dateExpiry: '-'
-    },
-    {
-      code: '#6457',
-      couponType: 'Cantidad',
-      quantity: 10000,
-      useLimit: 5,
-      dateExpiry: '-'
-    }
-  ];
-
+  coupons: any = [];
+  token: any;
   actualPage: number = 1;
 
-  constructor() { }
+  constructor(public couponService: CouponService, public auth: AuthService,
+    public router: Router) { }
 
   ngOnInit() {
+    this.token = this.auth.loadSession();
+    this.showCoupons();
+  }
+
+  showCoupons() {
+    this.couponService.getCoupons(this.token).subscribe(
+      (res: Response) => {
+        console.log(res.data);
+        if(res.ok) {          
+          this.coupons = res.data;
+        }
+      },
+      err => console.log(err)
+    );
+  }
+
+  editCoupon(name: string) {
+    this.router.navigate([`/vendor-panel/editar-cupon/${name}`]);
+  }
+
+  eraseCoupon(id: string) {
+    this.couponService.deleteCoupon(id, this.token).subscribe(
+      (res: Response) => {
+        console.log(res);
+        if(res.ok) {
+          this.showCoupons();
+        }
+      },
+      err => console.log(err)
+    );
   }
 
 }

@@ -20,8 +20,8 @@ export class PasswordRecoveryComponent implements OnInit {
   passwordChanged = false;
 
   constructor(
-    private userService: UserService,
-    private activatedRoute: ActivatedRoute
+    public userService: UserService,
+    public activatedRoute: ActivatedRoute
     ) { }
 
   ngOnInit() {

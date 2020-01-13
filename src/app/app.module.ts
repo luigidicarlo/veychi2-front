@@ -41,6 +41,8 @@ import { AdminHomeComponent } from './components/views/admin-dashboard/admin-hom
 import { CategoriesComponent } from './components/views/admin-dashboard/categories/categories.component';
 import { EditCategoryComponent } from './components/views/admin-dashboard/edit-category/edit-category.component';
 import { VendorsRequestComponent } from './components/views/admin-dashboard/vendors-request/vendors-request.component';
+import { AdminUsersComponent } from './components/views/admin-dashboard/admin-users/admin-users.component';
+import { SearchComponent } from './components/views/search/search.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,9 @@ import { VendorsRequestComponent } from './components/views/admin-dashboard/vend
     AdminHomeComponent,
     CategoriesComponent,
     EditCategoryComponent,
-    VendorsRequestComponent
+    VendorsRequestComponent,
+    AdminUsersComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

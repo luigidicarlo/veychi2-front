@@ -3,12 +3,14 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <a routerLink="/" class="navbar-brand nav-side-left"><img src="https://veychi.com/wp-content/uploads/2018/10/logo-veychi-r.png" width="100" height="100" alt=""></a>
-    <div class="input-group w-50 pr-4 d-none d-md-flex">      
-      <input type="text" class="form-control" placeholder="Buscar...">
-      <div class="input-group-append">
-        <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
-      </div>
-    </div>    
+    <form class="w-100" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+        <div class="input-group w-75 mx-auto d-none d-md-flex">
+          <input type="text" class="form-control" formControlName="input" placeholder="Buscar...">
+          <div class="input-group-append">
+            <button type="submit" class="input-group-text"><i class="fa fa-search"></i></button>
+          </div>
+        </div>
+    </form>    
     <ul class="navbar-nav flex-row nav-side-right text-center mx">
         <li class="nav-item icon" *ngIf="!auth.loggedIn">
             <i class="fa fa-user"></i>  

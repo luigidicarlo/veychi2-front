@@ -1,34 +1,38 @@
-<div class="table-responsive">
-      <br>
-      <!--Table-->
-      <table style="background: #fff;" class="table">
-    
-        <!--Table head-->
-        <thead>
-          <tr style="background: #c4366d;">
-            <th class="th-lg text-white text-center">Nombre</th>
-            <th class="th-lg text-white text-center">Acción</th>
-          </tr>
-        </thead>
-        <!--Table head-->
-    
-        <!--Table body-->
-        <tbody>
-          <tr *ngFor="let vendor of vendors">
-            <ng-container *ngIf="vendor.enabled == false">  
-              <td class="align-middle text-center">{{ vendor.name }}</td>
-              <td class="align-middle text-center">
-                <!--<a class="btn btn-primary">Editar</a>
-                <br><br>-->
-                <button class="btn btn-success" (click)="verifyVendor(vendor._id)">Aprobar</button>
-              </td>
-            </ng-container>
-          </tr>
-        </tbody>
-        <!--Table body-->
-      </table>
-      <!--Table-->
-    
-  </div>
-    
+<br>
+<h1 class="text-center">Vendedores pendientes por aprobación</h1>
+<br>
+<div id="accordion">
+    <div class="card" *ngFor="let vendor of vendors | paginate: {itemsPerPage: 10, currentPage: actualPage}; let i = index">
+      <div class="card-header">
+        <h6 class="mb-0">
+          <p>{{ vendor.name }}</p>
+          <div class="float-right" data-toggle="collapse" [attr.data-target] = "'#Id'+i" aria-expanded="false" aria-controls="collapseOne">
+            <i class="fa fa-chevron-down"></i>
+          </div>
+        </h6>
+      </div>
+  
+      <div id="{{'Id'+i}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <p>
+            Nombre de la tienda: <span><b>{{ vendor.name }}</b></span>
+          </p>
+          <p>
+            Actividad: <span><b>{{ vendor.activity }}</b></span>
+          </p>
+          <p>
+            RUT: <span><b>{{ vendor.rut }}</b></span>
+          </p>
+            <br>
+          <p>Descripción: </p>
+          <p>{{ vendor.description }}</p>
+          <br>
+          <button class="btn btn-success float-right" (click)="verifyVendor(vendor._id)">Aprobar</button>
+          <br><br>
+        </div>
+      </div>
+    </div>
+</div>
+<br><br>
+<pagination-controls (pageChange)="actualPage = $event"></pagination-controls>    
   

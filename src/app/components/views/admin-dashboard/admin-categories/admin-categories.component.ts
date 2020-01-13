@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router';
 import { Response } from '../../../../models/response.model';
 import { CategoryService } from '../../../../services/category.service';
 import { AuthService } from '../../../../services/auth.service';
-import { Category } from 'src/app/models/category.model';
+import { Category } from '../../../../models/category.model';
 
 @Component({
   selector: 'app-admin-categories',
@@ -28,8 +28,8 @@ export class AdminCategoriesComponent implements OnInit {
   noneCategory = "0";
   category: any = {};
 
-  constructor(private categoryService: CategoryService, private auth: AuthService,
-    private router: Router, private activedRoute: ActivatedRoute) { }
+  constructor(public categoryService: CategoryService, public auth: AuthService,
+    public router: Router, public activedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.token = this.auth.loadSession();    

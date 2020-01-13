@@ -19,7 +19,7 @@ export class ForgotPasswordComponent implements OnInit {
   submitted = false;
   error = false;
 
-  constructor(private userService: UserService) { }
+  constructor(public userService: UserService) { }
 
   ngOnInit() {
   }

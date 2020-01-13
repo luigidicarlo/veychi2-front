@@ -9,10 +9,9 @@
       <!--Table head-->
       <thead>
         <tr style="background: #c4366d;">
-          <th class="th-lg text-white text-center">Código</th>
+          <th class="th-lg text-white text-center">Nombre</th>
           <th class="th-lg text-white text-center">Tipo</th>
           <th class="th-lg text-white text-center">Cantidad</th>
-          <th class="th-lg text-white text-center">Límite de uso</th>
           <th class="th-lg text-white text-center">Fecha de caducidad</th>
           <th class="th-lg text-white text-center">Acción</th>
         </tr>
@@ -22,24 +21,26 @@
       <!--Table body-->
       <tbody>
         <tr *ngFor="let coupon of coupons | paginate: {itemsPerPage: 7, currentPage: actualPage}">          
-          <td class="align-middle text-center">{{ coupon.code }}</td>
+          <td class="align-middle text-center">{{ coupon.name }}</td>
           <td class="align-middle text-center">
-            <span class="discount-type">
-              {{ coupon.couponType }}
+            <span class="discount-type" *ngIf="coupon.percentage">
+              Porcentaje
+            </span>
+            <span class="discount-type" *ngIf="!coupon.percentage">
+              Cantidad
             </span>
           </td>
-          <ng-container *ngIf="coupon.couponType == 'Porcentaje'">
-            <td class="align-middle text-center" >{{ coupon.quantity }}%</td>
+          <ng-container *ngIf="coupon.percentage">
+            <td class="align-middle text-center" >{{ coupon.value }}%</td>
           </ng-container>
-          <ng-container *ngIf="coupon.couponType == 'Cantidad'">
-            <td class="align-middle text-center" >{{ coupon.quantity }} CLP</td>
-          </ng-container>
-          <td class="align-middle text-center">{{ coupon.useLimit }}</td>
-          <td class="align-middle text-center">{{ coupon.dateExpiry }}</td>
+          <ng-container *ngIf="!coupon.percentage">
+            <td class="align-middle text-center" >{{ coupon.value }} CLP</td>
+          </ng-container>          
+          <td class="align-middle text-center">{{ coupon.expiration }}</td>
           <td class="align-middle text-center">
-            <i class="fa fa-edit" style="font-size:30px;color:green"></i>
+            <i class="fa fa-edit" style="font-size:30px; color:green; cursor: pointer;" (click)="editCoupon(coupon.name)"></i>
             <br><br>
-            <i class="fa fa-remove" style="font-size:30px;color:red"></i>
+            <i class="fa fa-remove" style="font-size:30px; color:red; cursor: pointer;" (click)="eraseCoupon(coupon._id)"></i>
           </td>
         </tr>        
       </tbody>

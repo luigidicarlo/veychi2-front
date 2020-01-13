@@ -18,8 +18,8 @@ export class VendorProductsComponent implements OnInit {
 
   token: any;
 
-  constructor(private productService: ProductService, private auth: AuthService,
-    private router: Router) { }
+  constructor(public productService: ProductService, public auth: AuthService,
+    public router: Router) { }
 
   ngOnInit() {
     this.token = this.auth.loadSession();

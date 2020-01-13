@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { UserService } from '../../../services/user.service';
 import { CategoryService } from '../../../services/category.service';
@@ -12,12 +14,19 @@ import { Category } from 'src/app/models/category.model';
 })
 export class NavbarComponent implements OnInit {
 
+  searchForm: FormGroup = new FormGroup({
+    input: new FormControl('', Validators.required)
+  });
+
   categories: Category[] = [];
+
+  keys: string;
 
   constructor(
   	private auth: AuthService,
   	private userService: UserService,
-  	private categoryService: CategoryService
+  	private categoryService: CategoryService,
+    public router: Router
   ) { }  
 
   ngOnInit() {
@@ -34,6 +43,12 @@ export class NavbarComponent implements OnInit {
       },
       err => console.log(err)
     );
+  }
+
+  onSubmit() {
+    const searchInput = this.searchForm.get('input').value as string;
+    this.keys = searchInput.split(' ').join('+');    
+    this.router.navigate([`/busqueda/${this.keys}`]);
   }
 
 }

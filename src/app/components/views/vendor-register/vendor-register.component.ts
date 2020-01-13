@@ -25,7 +25,7 @@ export class VendorRegisterComponent implements OnInit {
   registered = false;
   error = false;
 
-  constructor(private userService: UserService, private auth: AuthService) { }
+  constructor(public userService: UserService, public auth: AuthService) { }
 
   ngOnInit() {
     this.token = this.auth.loadSession();

@@ -9,7 +9,7 @@ import { CartService } from '../../../services/cart.service';
 })
 export class CartComponent implements OnInit {
 
-  constructor(private cartService: CartService) { }
+  constructor(public cartService: CartService) { }
 
   cart: any[] = [];
 

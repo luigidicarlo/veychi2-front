@@ -17,8 +17,8 @@ export class ProductCategoryComponent implements OnInit {
 
   actualPage: number = 1;
   
-  constructor(private activatedRoute: ActivatedRoute, private categoryService: CategoryService,
-  private router: Router, private productService: ProductService) {
+  constructor(public activatedRoute: ActivatedRoute, public categoryService: CategoryService,
+  public router: Router, public productService: ProductService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 

@@ -25,6 +25,8 @@ import { AdminCategoriesComponent } from './components/views/admin-dashboard/adm
 import { AdminHomeComponent } from './components/views/admin-dashboard/admin-home/admin-home.component';
 import { CategoriesComponent } from './components/views/admin-dashboard/categories/categories.component';
 import { VendorsRequestComponent } from './components/views/admin-dashboard/vendors-request/vendors-request.component';
+import { AdminUsersComponent } from './components/views/admin-dashboard/admin-users/admin-users.component';
+import { SearchComponent } from './components/views/search/search.component';
 
 const routes: Routes = [
   {
@@ -61,6 +63,10 @@ const routes: Routes = [
     component: CartComponent
   },
   {
+    path: 'busqueda/:keys',
+    component: SearchComponent
+  },
+  {
     path: 'checkout',
     component: CheckoutComponent
   },
@@ -95,6 +101,10 @@ const routes: Routes = [
         path: 'crear-cupon',
         component: AddCouponComponent
       },
+      {
+        path: 'editar-cupon/:name',
+        component: AddCouponComponent
+      },      
       {
         path: 'estadisticas',
         component: VendorStatsComponent
@@ -143,6 +153,10 @@ const routes: Routes = [
       {
         path: 'solicitud-vendedores',
         component: VendorsRequestComponent
+      },
+      {
+        path: 'usuarios',
+        component: AdminUsersComponent
       }
     ]
   }

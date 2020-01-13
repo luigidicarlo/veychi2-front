@@ -9,7 +9,7 @@ import { Response } from '../../../../models/response.model';
 })
 export class CategoriesComponent implements OnInit {
 
-  constructor(private categoryService: CategoryService, private auth: AuthService) { }
+  constructor(public categoryService: CategoryService, public auth: AuthService) { }
 
   token: any = '';
   categories: any[] = [];

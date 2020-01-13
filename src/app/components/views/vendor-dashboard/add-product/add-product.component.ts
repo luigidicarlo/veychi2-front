@@ -25,7 +25,7 @@ export class AddProductComponent implements OnInit {
   });
 
   token: any = '';
-  submitted = false;  
+  submitted = false;
   error = false;
   edit: boolean = false;
   singleProduct: any = {};
@@ -33,8 +33,8 @@ export class AddProductComponent implements OnInit {
 
   selectedImage: File = null;
 
-  constructor(private productService: ProductService, private categoryService: CategoryService,
-    private auth: AuthService, private router: Router, private activedRoute: ActivatedRoute) { }
+  constructor(public productService: ProductService, public categoryService: CategoryService,
+    public auth: AuthService, public router: Router, public activedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.token = this.auth.loadSession();

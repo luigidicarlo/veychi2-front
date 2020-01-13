@@ -1,32 +1,31 @@
 <div class="container">
-    <form>
+    <form [formGroup]="couponForm" (ngSubmit)="edit ? onEdit() : onSubmit()">
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="formGroupExampleInput">Código del cupón</label>
-                    <input type="text" class="form-control" placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Descripción del Cupón</label>
-                    <input type="text" class="form-control" placeholder="Another input">
-                </div>
+                    <label for="formGroupExampleInput">Nombre del Cupón</label>
+                    <input type="text" class="form-control" id="name" [(ngModel)]="singleCoupon.name" formControlName="name" placeholder="">
+                </div>                
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Tipo de cupón</label>
-                    <select class="form-control" [(ngModel)]="selectedOption">
-                      <option *ngFor="let option of options" [selected]="options.name === 'Porcentaje'">{{ option.name }}</option>                     
+                    <select class="form-control" formControlName="percentage" [(ngModel)]="singleCoupon.percentage">
+                      <option value="false">Cantidad</option>
+                      <option value="true">Porcentaje</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <ng-container *ngIf="printedOption == 'Porcentaje'">
-                        <label for="exampleFormControlTextarea1">Monto del cupón (%)</label>
-                        <input type="number" class="form-control" placeholder="Ej: 50">
-                    </ng-container>
-                    <ng-container *ngIf="printedOption == 'Cantidad'">
-                        <label for="exampleFormControlTextarea1">Monto del cupón (CLP)</label>
-                        <input type="number" class="form-control" placeholder="Ej: 10000">
-                    </ng-container>
+                <div class="form-group">                    
+                    <label for="exampleFormControlTextarea1">Valor de descuento del cupón</label>
+                    <input type="number" class="form-control" [(ngModel)]="singleCoupon.value" formControlName="value" placeholder="Ejemplo: 50">
                 </div>
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Fecha de expiración del Cupón</label>
+                    <input type="text" class="form-control" id="expiration" [(ngModel)]="singleCoupon.expiration" formControlName="expiration" placeholder="">
+                </div>
+                <button type="submit" class="btn btn-primary" [disabled]="couponForm.invalid || submitted">Guardar</button>
+                <small class="form-text text-danger"
+                    *ngIf="error">
+                    Ha ocurrido un error
+                </small>
             </div>
         </div>
     </form>
@@ -34,4 +33,3 @@
         
     </form>
 </div>
-

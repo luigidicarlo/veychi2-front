@@ -1,0 +1,44 @@
+<br>
+<h1 class="text-center">Usuarios</h1>
+<br>
+<div id="accordion">
+    <div class="card" *ngFor="let user of users | paginate: {itemsPerPage: 10, currentPage: actualPage}; let i = index">
+      <ng-container *ngIf="user.active">
+	      <div class="card-header">
+	        <h6 class="mb-0">
+	          <p>{{ user.username }}</p>
+	          <div class="float-right" data-toggle="collapse" [attr.data-target] = "'#Id'+i" aria-expanded="false" aria-controls="collapseOne">
+	            <i class="fa fa-chevron-down"></i>
+	          </div>
+	        </h6>
+	      </div>
+	  
+	      <div id="{{'Id'+i}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+	        <div class="card-body">
+	          <p>
+	            Nombre de usuario: <span><b>{{ user.username }}</b></span>
+	          </p>
+	          <p>
+	            Nombre completo: <span><b>{{ user.fname }} </b></span><span><b>{{ user.lname }}</b></span>
+	          </p>
+	          <p>
+	            Correo: <span><b>{{ user.email }}</b></span>
+	          </p>
+	            <br>
+	          <p *ngIf="user.role == 'CLIENT_ROLE'">
+	            Rol del usuario: <span><b>Cliente</b></span>
+	          </p>
+	          <p *ngIf="user.role == 'ADMIN_ROLE'">
+	            Rol del usuario: <span><b>Administrador</b></span>
+	          </p>
+	          <br>
+	          <button class="btn btn-danger float-right" (click)="eraseUser(user._id)">Borrar</button>
+	          <br><br>
+	        </div>
+	      </div>
+      </ng-container>
+    </div>
+</div>
+<br><br>
+<pagination-controls (pageChange)="actualPage = $event"></pagination-controls>    
+  
