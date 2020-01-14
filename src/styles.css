@@ -1,3 +1,12 @@
 body {
-    background-color: #f7f7f7;
+  background-color: #f7f7f7;
+}
+.bg-pink {
+  background-color: #c4366d !important;
+  border-color: #c4366d !important;
+  color: #fff !important;
+}
+.bg-pink:hover {
+  background-color: #b11953 !important;
+  border-color: #b11953 !important;
 }

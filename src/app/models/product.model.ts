@@ -1,10 +1,18 @@
 import { Store } from './store.model';
 
-export interface Product{
-    id: string;
-    name: string;
-    description: string;
-    image: string;
-    price: number;
-    store: Store;
+export default class Product {
+    constructor(
+        public _id: string,
+        public name: string,
+        public shortDescription: string,
+        public description: string,
+        public images: string[],
+        public tags: string[],
+        public price: number,
+        public discount: number,
+        public store: Store,
+        public createdAt: Date,
+        public updatedAt: Date
+    ) {}
+
 }

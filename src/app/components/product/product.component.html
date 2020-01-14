@@ -1,0 +1,13 @@
+<div class="Product masonry-layout__panel-content">
+  <a [routerLink]="['/single-product', product._id]">
+    <img class="img-fluid" [src]="image" [alt]="product.name" />
+  </a>
+  <h5 class="text-center">{{ product.name }}</h5>
+  <p class="card-text text-center">{{ product.price }} CLP</p>
+  <a
+    class="btn bg-pink btn-block text-uppercase mb-2"
+    [routerLink]="['/single-product', product._id]"
+  >
+    Ver producto
+  </a>
+</div>

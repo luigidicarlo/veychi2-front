@@ -1,0 +1,52 @@
+<br /><br />
+<div class="row row-border">
+  <div class="col-md-7 left-col mx-auto">
+    <div class="row">
+      <h1 class="section-title text-center ml-4">DESTACADOS</h1>
+    </div>
+    <br />
+    <div class="masonry-layout-featured">
+      <div
+        class="masonry-layout__panel"
+        *ngFor="let product of products | slice: 0:6"
+      >
+        <app-product [product]="product"></app-product>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5 mx-auto">
+    <div class="row">
+      <h1 class="section-title text-center ml-4">OFERTAS</h1>
+    </div>
+    <br />
+    <div class="masonry-layout-discount">
+      <div class="masonry-layout__panel">
+        <app-product
+          *ngFor="let product of products"
+          [product]="product"
+          discount="true"
+        ></app-product>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<div class="row">
+  <h1 class="section-title text-center">NUEVOS PRODUCTOS</h1>
+</div>
+<br />
+
+<div class="masonry-layout-general bottom-border">
+  <div
+    class="masonry-layout__panel"
+    *ngFor="
+      let product of products
+        | paginate: { itemsPerPage: 15, currentPage: actualPage }
+    "
+  >
+    <app-product [product]="product"></app-product>
+  </div>
+</div>
+<br />
+
+<pagination-controls (pageChange)="actualPage = $event"></pagination-controls>

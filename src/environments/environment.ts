@@ -1,8 +1,5 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
 export const environment = {
   production: false,
-  apiBase: 'http://localhost:3535'
+  apiBase: "http://localhost:3535",
+  logoUrl: "https://veychi.com/wp-content/uploads/2018/10/logo-veychi-r.png"
 };
