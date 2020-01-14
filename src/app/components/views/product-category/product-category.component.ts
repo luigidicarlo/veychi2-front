@@ -28,11 +28,9 @@ export class ProductCategoryComponent implements OnInit {
 
   showProducts() {
     if(this.router.url.includes("categorias")) {
-      console.log("CATEGORÍAS");
       const params = this.activatedRoute.snapshot.params;
       this.categoryService.getCategoryProduct(params.id).subscribe(
         (res: Response) => {
-          console.log(res);
           if(res.ok) {
             this.products = res.data;
           }
@@ -40,13 +38,11 @@ export class ProductCategoryComponent implements OnInit {
         err => console.log(err)
       );  
     } else if(this.router.url.includes("vendor-products")) {
-      console.log("TIENDA");
       this.storeID = this.activatedRoute.snapshot.params.id;
       this.productService.getProducts().subscribe(
         (res: Response) => {
           if(res.ok) {
             this.products = res.data
-            console.log(this.products);
           }        
         },
         err => console.log(err)

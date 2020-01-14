@@ -23,8 +23,8 @@ export class NavbarComponent implements OnInit {
   keys: string;
 
   constructor(
-  	private auth: AuthService,
-  	private userService: UserService,
+  	public auth: AuthService,
+  	public userService: UserService,
   	private categoryService: CategoryService,
     public router: Router
   ) { }  
