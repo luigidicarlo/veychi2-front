@@ -1,0 +1,33 @@
+.bg-pink {
+    background-color: #c4366d !important;
+    border-color: #c4366d !important;
+    color: #fff;
+}
+
+.masonry-layout-general {
+  column-count: 5;
+  column-gap: 0;
+}
+
+.masonry-layout__panel {
+  break-inside: avoid;
+  padding: 5px;
+}
+.masonry-layout__panel-content {
+  padding: 10px;
+  border-radius: 10px;
+}
+
+@media (max-width: 991px) and (min-width: 576px) {
+    .masonry-layout-general {
+      column-count: 4;
+      column-gap: 0;
+    }
+}
+
+@media (max-width: 575px) {
+    .masonry-layout-general {
+        column-count: 2;
+        column-gap: 0;
+    }    
+}

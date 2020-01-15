@@ -24,8 +24,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(
   	public auth: AuthService,
-  	public userService: UserService,
-  	private categoryService: CategoryService,
+    public userService: UserService,
+    private categoryService: CategoryService,
     public router: Router
   ) { }  
 
@@ -47,7 +47,8 @@ export class NavbarComponent implements OnInit {
 
   onSubmit() {
     const searchInput = this.searchForm.get('input').value as string;
-    this.keys = searchInput.split(' ').join('+');    
+    this.keys = searchInput.split(' ').join('+').toLowerCase();
+    console.log(this.keys);
     this.router.navigate([`/busqueda/${this.keys}`]);
   }
 

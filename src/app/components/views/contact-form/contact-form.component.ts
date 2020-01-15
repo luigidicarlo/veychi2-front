@@ -21,9 +21,10 @@ export class ContactFormComponent implements OnInit {
     ])
   });
 
-  constructor() {}
+  
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
-  onSubmit() {}
 }

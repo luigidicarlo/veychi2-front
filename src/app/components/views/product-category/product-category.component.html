@@ -1,7 +1,7 @@
 <div class="container">
-    <div class="row">
+    <div class="row" *ngIf="!auxStore">
         <ng-container *ngIf="storeID == null">
-            <div class="col-md-9">
+            <div class="col-md-9 mx-auto">
                 <br>
                 <div class="row">
                     <h1 class="section-title text-center">Categoría</h1>
@@ -13,15 +13,30 @@
                         <div class="card-body">
                             <h5 class="card-title text-center">{{ product.name }}</h5>
                             <p class="card-text text-center">{{ product.price }} CLP</p>
-                            <button type="submit" class="btn bg-pink btn-block text-uppercase mb-2"[routerLink]="['/single-product', product._id]">Ver producto</button>
+                            <button type="submit" class="btn bg-pink btn-block text-uppercase mb-2"[routerLink]="['/single-product', product._id]">Ver</button>
                         </div>
-                    </div>               
+                    </div>
                 </div>
                 <pagination-controls (pageChange)="actualPage = $event"></pagination-controls>
             </div>
         </ng-container>
+        <div class="col-md-3 mx-auto">
+            <app-category-list></app-category-list>
+        </div>
+    </div>
+    <div class="row" *ngIf="auxStore">
         <ng-container *ngIf="storeID != null">
-            <div class="col-md-9">
+
+            <div class="col-md-3 mx-auto" *ngIf="products.length">
+                <br>
+                <div class="text-center">
+                    <img class="img-fluid" src="{{ products[0].store.imageUrl }}">    
+                </div>
+                <br>                
+                <h5 class="text-center">{{ products[0].store.name }}</h5>
+                <p class="text-center">{{ products[0].store.description }}</p>
+            </div>
+            <div class="col-md-9 mx-auto">
                 <br>
                 <div class="row" *ngIf="products.length">
                     <h1 class="section-title text-center">{{ products[0].store.name }}</h1>
@@ -34,16 +49,13 @@
                             <div class="card-body">
                                 <h5 class="card-title text-center">{{ product.name }}</h5>
                                 <p class="card-text text-center">{{ product.price }} CLP</p>
-                                <button type="submit" class="btn bg-pink btn-block text-uppercase mb-2" [routerLink]="['/single-product', product._id]">Ver producto</button>
+                                <button type="submit" class="btn bg-pink btn-block text-uppercase mb-2" [routerLink]="['/single-product', product._id]">Ver</button>
                             </div>
                         </div>
                     </ng-container>
                 </div>
                 <pagination-controls (pageChange)="actualPage = $event"></pagination-controls>
             </div>
-        </ng-container>
-        <div class="col-md-3">
-            <app-category-list></app-category-list>
-        </div>
-    </div>    
+        </ng-container>        
+    </div>
 </div>

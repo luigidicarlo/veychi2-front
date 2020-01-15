@@ -14,7 +14,7 @@ export class ProductCategoryComponent implements OnInit {
 
   products: Product[] = [];
   storeID = null;
-
+  auxStore: boolean = false;
   actualPage: number = 1;
   
   constructor(public activatedRoute: ActivatedRoute, public categoryService: CategoryService,
@@ -28,6 +28,7 @@ export class ProductCategoryComponent implements OnInit {
 
   showProducts() {
     if(this.router.url.includes("categorias")) {
+      this.auxStore = false;
       const params = this.activatedRoute.snapshot.params;
       this.categoryService.getCategoryProduct(params.id).subscribe(
         (res: Response) => {
@@ -38,6 +39,7 @@ export class ProductCategoryComponent implements OnInit {
         err => console.log(err)
       );  
     } else if(this.router.url.includes("vendor-products")) {
+      this.auxStore = true;
       this.storeID = this.activatedRoute.snapshot.params.id;
       this.productService.getProducts().subscribe(
         (res: Response) => {

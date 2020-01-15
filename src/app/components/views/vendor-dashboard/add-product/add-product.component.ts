@@ -73,9 +73,9 @@ export class AddProductComponent implements OnInit {
     this.productService.createProduct(product, this.token).subscribe(
       (res: Response) => {
         if(res.ok) {
-          console.log(res);          
+          console.log(res);
           this.router.navigate(['/vendor-panel/productos']);
-        }        
+        }
       },
       err => {
         console.log(err);
