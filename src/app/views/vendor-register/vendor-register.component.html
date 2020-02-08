@@ -1,0 +1,110 @@
+<br><br>
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-12 col-md-10 col-lg-8 pb-5 mx-auto" *ngIf="auth.isLoggedIn">
+            <ng-container *ngIf="!registered">                            
+                <h3 class="text-center">Registro de vendedores</h3>
+                <br><br>
+                <form [formGroup]="vendorForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group mb-3">
+                        <label class="text-muted mb-4">Nombre de la tienda</label>
+                        <input id="inputEmail" type="text" autofocus formControlName="storeName" class="form-control rounded-pill border-0 shadow-sm px-4">
+                        <div *ngIf="vendorForm.get('storeName').touched && vendorForm.get('storeName').hasError('required')">
+                            <span class="text-danger">
+                              Debes ingresar el nombre de tu tienda
+                            </span>
+                        </div>
+                        <div *ngIf="vendorForm.get('storeName').touched && vendorForm.get('storeName').hasError('pattern')">
+                            <span class="text-danger">
+                              El valor ingresado no es válido. El campo sólo admite letras (A-Z), números espacios y comillas ('')
+                            </span>
+                        </div>
+                        <div *ngIf="vendorForm.get('storeName').touched && (vendorForm.get('storeName').value.length < constants.namesMinLength || vendorForm.get('storeName').value.length > constants.namesMaxLength)">
+                            <span class="text-danger">
+                              El campo debe poseer entre {{ constants.namesMinLength }} y {{ constants.namesMaxLength }} caracteres
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="text-muted mb-4">Por favor describa algo acerca de su compañia y qué productos va a vender</label>
+                        <input type="text" formControlName="storeDescription" class="form-control rounded-pill border-0 shadow-sm px-4">
+                        <div *ngIf="vendorForm.get('storeDescription').touched && vendorForm.get('storeDescription').hasError('required')">
+                            <span class="text-danger">
+                              Debes ingresar una descripción de su tienda
+                            </span>
+                        </div>
+                        <div *ngIf="vendorForm.get('storeDescription').touched">
+                            <span class="text-danger">
+                              Este campo es requerido
+                            </span>
+                        </div>
+                        <div *ngIf="vendorForm.get('storeDescription').touched && (vendorForm.get('storeDescription').value.length < constants.shortDescMinLength || vendorForm.get('storeDescription').value.length > constants.shortDescMaxLength)">
+                            <span class="text-danger">
+                              El campo debe poseer entre {{ constants.shortDescMinLength }} y {{ constants.shortDescMaxLength }} caracteres
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="text-muted mb-4">RUT de la empresa</label>
+                        <input type="text" formControlName="rut" class="form-control rounded-pill border-0 shadow-sm px-4">
+                        <div *ngIf="vendorForm.get('rut').touched && vendorForm.get('rut').hasError('required')">
+                            <span class="text-danger">
+                              Debes ingresar su RUT
+                            </span>
+                        </div>
+                        <div *ngIf="vendorForm.get('rut').touched && vendorForm.get('rut').hasError('pattern')">
+                            <span class="text-danger">
+                              El valor ingresado no es válido.
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="text-muted mb-4">Giro de la empresa</label>
+                        <input type="text" formControlName="storeActivity" class="form-control rounded-pill border-0 shadow-sm px-4">
+                        <div *ngIf="vendorForm.get('storeActivity').touched && vendorForm.get('storeActivity').hasError('required')">
+                            <span class="text-danger">
+                              Debes indicar el giro de su tienda
+                            </span>
+                        </div>
+                        <div *ngIf="vendorForm.get('storeActivity').touched">
+                            <span class="text-danger">
+                              Este campo es requerido
+                            </span>
+                        </div>
+                        <div *ngIf="vendorForm.get('storeActivity').touched && (vendorForm.get('storeActivity').value.length < constants.namesMinLength || vendorForm.get('storeActivity').value.length > constants.namesMaxLength)">
+                            <span class="text-danger">
+                              El campo debe poseer entre {{ constants.namesMinLength }} y {{ constants.namesMaxLength }} caracteres
+                            </span>
+                        </div>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input id="customCheck1" formControlName="tc" type="checkbox" checked class="custom-control-input">
+                        <label for="customCheck1" class="custom-control-label">Acepto los términos y condiciones</label>
+                    </div>
+                    <div *ngIf="vendorForm.touched && vendorForm.invalid">
+                        <span class="text-danger">
+                            Existen errores en los campos del formulario
+                        </span>
+                    </div>
+                    <button type="submit" class="btn bg-pink btn-block text-uppercase mb-2 rounded-pill shadow-sm" [disabled]="vendorForm.invalid || submitted">Enviar solicitud</button>
+                    <small class="form-text text-danger"
+                        *ngIf="error">
+                        Ha ocurrido un error
+                    </small>
+                </form>
+            </ng-container>
+            <ng-container *ngIf="registered">
+                <br><br><br>
+                    <div class="text-center">
+                        <h1>Usted ya es un vendedor</h1>
+                        <br>
+                        <a class="btn bg-pink btn-block" routerLink="/vendor-panel">Ir al panel de vendedor</a>
+                    </div>
+                <br><br><br>
+            </ng-container>
+        </div>
+        <div class="col-12 col-md-10 col-lg-8 pb-5 mx-auto" *ngIf="!auth.isLoggedIn">
+            <h1>Debes tener una sesión iniciada para solicitar ser un vendedor</h1>
+        </div>
+    </div>
+</div>

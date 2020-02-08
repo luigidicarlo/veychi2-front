@@ -1,0 +1,188 @@
+/* ESTILOS DE LA BARRA DE NAVEGACIÓN */
+.Navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+}
+.Navbar .navbar-toggler {
+  position: absolute;
+  top: 0.25rem;
+  left: 0.25rem;
+  background-color: rgba(247, 247, 247, 0.5);
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  transition: all ease-out 200ms;
+  z-index: 10;
+}
+.Navbar .navbar-toggler.show {
+  transform: translate(6px, 0);
+}
+.Navbar .navbar-toggler.show .navbar-toggler-line {
+  background-color: #5e5e5e;
+}
+.Navbar .navbar-toggler.show .navbar-toggler-line:nth-child(1) {
+  transform: rotate(45deg) translate(0, 15px);
+}
+.Navbar .navbar-toggler.show .navbar-toggler-line:nth-child(2) {
+  opacity: 0;
+}
+.Navbar .navbar-toggler.show .navbar-toggler-line:nth-child(3) {
+  transform: rotate(-45deg) translate(0, -15px);
+}
+.Navbar .navbar-toggler .navbar-toggler-line {
+  height: 3px;
+  margin: 8px 6px;
+  background-color: #ababab;
+  border-radius: 3px;
+  transition: all ease-out 200ms;
+}
+.Navbar .toggle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f7f7f7;
+  z-index: 5;
+  padding: 1rem 0;
+  font-size: 1.2rem;
+  box-shadow: 0px 0px 10px rgba(34, 34, 34, 0.5);
+  transform: translate(0, -100%);
+  transition: all ease-out 300ms;
+}
+.Navbar .toggle.show {
+  transform: translate(0, 0);
+}
+.Navbar .toggle .navbar-brand {
+  width: 100%;
+  text-align: center;
+}
+.Navbar .toggle .navbar-brand .navbar-image {
+  width: 96px;
+}
+.Navbar .toggle .navbar-nav .navbar-link {
+  display: block;
+  padding: 0.5rem 1rem;
+}
+.navbar-link {
+  color: #636363 !important;
+}
+.navbar-link:hover {
+  color: #222222 !important;
+}
+.Navbar .toggle .navbar-section {
+  border-top: 1px solid #222222;
+}
+.Navbar .toggle .navbar-section a {
+  display: block;
+  padding: 0.5rem 1rem;
+}
+.Navbar .toggle .navbar-section a br {
+  display: none;
+}
+.Navbar .toggle .navbar-section a i.fa {
+  width: 1.5rem;
+}
+.Navbar .toggle .navbar-search {
+  border-top: 1px solid #222222;
+  padding-bottom: 0.5rem;
+}
+.Navbar .toggle .navbar-search form {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  display: flex;
+}
+.Navbar .toggle .navbar-search form input.form-control,
+.Navbar .toggle .navbar-search form input.form-control:focus {
+  outline: none;
+  width: 85%;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.Navbar .toggle .navbar-search form button[type=submit] {
+  width: 15%;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.Navbar .toggle .navbar-search form button[type=submit].btn {
+  background-color: #c4366d;
+  color: #f7f7f7;
+}
+.Navbar .toggle .navbar-search form button[type=submit].btn:hover, .Navbar .toggle .navbar-search form button[type=submit].btn:active {
+  background-color: #a7326f;
+  color: #f7f7f7;
+}
+@media screen and (min-width: 769px) {
+  .Navbar .navbar-toggler {
+    display: none;
+  }
+  .Navbar .toggle {
+    transform: translate(0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1rem;
+    padding: 0;
+  }
+  .Navbar .toggle .navbar-brand {
+    width: 20%;
+  }
+  .Navbar .toggle .navbar-brand .navbar-image {
+    width: 64px;
+  }
+  .Navbar .toggle .navbar-search,
+.Navbar .toggle .navbar-section {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-top: none;
+  }
+  .Navbar .toggle .navbar-search {
+    width: 40%;
+  }
+  .Navbar .toggle .navbar-section {
+    width: 40%;
+  }
+  .Navbar .toggle .navbar-section .navbar-link br {
+    display: block;
+  }
+}
+
+/* ESTILOS DEL MENÚ */
+.menu {
+  margin-top: 76px;
+  display: grid;
+  grid-template-columns: repeat(5, calc(100% / 5)) !important;
+  background-color: #c4366d;
+}
+.item-container {
+  cursor: pointer;
+  padding: 15px;
+}
+.item-container:hover {
+  background-color: #ef8959;
+}
+.menu-item {
+  color: #fff;
+}
+
+@media (max-width: 1275px) {
+  .menu {
+    margin-top: 128px !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .menu {
+    display: none;
+  }
+}

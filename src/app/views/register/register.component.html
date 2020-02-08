@@ -1,0 +1,137 @@
+<br><br>
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-12 col-md-10 col-lg-6 pb-5 mx-auto">
+            <ng-container *ngIf="!registered">
+            <h3 class="text-center">Regístrate</h3>
+                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">                    
+                    <div class="form-group mb-3">
+                        <label class="text-muted mb-4">Nombre de usuario</label>
+                        <input type="text" placeholder="" autofocus id="username" formControlName="username" class="form-control rounded-pill border-0 shadow-sm px-4">
+                        <div
+                            *ngIf="
+                              registerForm.get('username').touched &&
+                              registerForm.get('username').hasError('required')
+                            "
+                          >
+                            <span class="text-danger">
+                              Debes ingresar un nombre de usuario
+                            </span>
+                          </div>
+                          <div
+                            *ngIf="
+                              registerForm.get('username').touched &&
+                              (registerForm.get('username').value.length < constants.usernameMinLength ||
+                                registerForm.get('username').value.length > constants.usernameMaxLength)
+                            "
+                          >
+                            <span class="text-danger">
+                              El nombre de usuario debe tener entre {{ constants.usernameMinLength }} y {{ constants.usernameMaxLength }} caracteres
+                            </span>
+                          </div>
+                          <div
+                            *ngIf="
+                              registerForm.get('username').touched &&
+                              registerForm.get('username').hasError('pattern')
+                            "
+                          >
+                            <span class="text-danger">
+                              El nombre de usuario debe comenzar con una letra y sólo puede
+                              contener caracteres alfanuméricos, guiones, puntos y guiones bajos
+                              (-._)
+                            </span>
+                          </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="text-muted mb-4">Nombres</label>
+                        <input type="text" placeholder="" id="fname" formControlName="fname" class="form-control rounded-pill border-0 shadow-sm px-4">
+                        <div *ngIf="registerForm.get('fname').touched && registerForm.get('fname').hasError('required')">
+                            <span class="text-danger">
+                              Debes ingresar tu nombre
+                            </span>
+                        </div>
+                        <div *ngIf="registerForm.get('fname').touched && registerForm.get('fname').hasError('pattern')">
+                            <span class="text-danger">
+                              El valor ingresado no es válido. El campo sólo admite letras (A-Z), espacios y comillas ('')
+                            </span>
+                        </div>
+                        <div *ngIf="registerForm.get('fname').touched && (registerForm.get('fname').value.length < constants.namesMinLength || registerForm.get('fname').value.length > constants.namesMaxLength)">
+                            <span class="text-danger">
+                              El campo debe poseer entre {{ constants.namesMinLength }} y {{ constants.namesMaxLength }} caracteres
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="text-muted mb-4">Apellidos</label>
+                        <input type="text" placeholder="" id="lname" formControlName="lname" class="form-control rounded-pill border-0 shadow-sm px-4">
+                        <div *ngIf="registerForm.get('lname').touched && registerForm.get('lname').hasError('required')">
+                            <span class="text-danger">
+                              Debes ingresar tu apellido
+                            </span>
+                        </div>
+                        <div *ngIf="registerForm.get('lname').touched && registerForm.get('lname').hasError('pattern')">
+                            <span class="text-danger">
+                              El valor ingresado no es válido. El campo sólo admite letras (A-Z), espacios y comillas ('')
+                            </span>
+                        </div>
+                        <div *ngIf="registerForm.get('lname').touched && (registerForm.get('lname').value.length < constants.namesMinLength || registerForm.get('lname').value.length > constants.namesMaxLength)">
+                            <span class="text-danger">
+                              El campo debe poseer entre {{ constants.namesMinLength }} y {{ constants.namesMaxLength }} caracteres
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="text-muted mb-4">Dirección de correo electrónico</label>
+                        <input type="email" placeholder="" id="email" formControlName="email" class="form-control rounded-pill border-0 shadow-sm px-4">
+                        <div *ngIf="registerForm.get('email').touched && registerForm.get('email').hasError('required')">
+                            <span class="text-danger">
+                              Debes ingresar una dirección de correo electrónico válida
+                            </span>
+                        </div>
+                        <div *ngIf="registerForm.get('email').touched && registerForm.get('email').hasError('pattern') || registerForm.get('email').hasError('email')">
+                            <span class="text-danger">
+                              El correo electrónico ingresado no es válido
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="text-muted mb-4">Contraseña</label>
+                        <input type="password" placeholder="" id="password" formControlName="password" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                        <div *ngIf="registerForm.get('password').touched && registerForm.get('password').hasError('required')">
+                            <span class="text-danger">
+                              Debes ingresar una contraseña para proteger tu cuenta. Debe contener entre {{ constants.usernameMinLength }} y {{ constants.usernameMaxLength }} caracteres alfanuméricos
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="text-muted mb-4">Confirme contraseña</label>
+                        <input type="password" placeholder="" id="confirmPassword" formControlName="repeatPassword" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                        <div *ngIf="registerForm.get('repeatPassword').touched && registerForm.hasError('matchPasswords')">
+                            <span class="text-danger">
+                              Las contraseñas ingresadas no coinciden
+                            </span>
+                        </div>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input id="customCheck1" formControlName="tc" type="checkbox" checked class="custom-control-input">
+                        <label for="customCheck1" class="custom-control-label">Acepto los términos y condiciones</label>
+                    </div>
+                    <div *ngIf="registerForm.touched && registerForm.invalid">
+                        <span class="text-danger">
+                            Existen errores en los campos del formulario
+                        </span>
+                    </div>
+                    <button type="submit" class="btn bg-pink btn-block text-uppercase mb-2 rounded-pill shadow-sm" [disabled]="registerForm.invalid || submitted">Registrarse</button>                    
+                </form>
+            </ng-container>
+            <ng-container *ngIf="registered">                            
+                <div class="text-center">
+                    <h1>Se ha registrado exitosamente</h1>
+                    <br>
+                    <a class="btn bg-pink btn-block" routerLink="/login">Iniciar sesión</a>
+                </div>
+                
+            </ng-container>   
+        </div>
+    </div>
+</div>

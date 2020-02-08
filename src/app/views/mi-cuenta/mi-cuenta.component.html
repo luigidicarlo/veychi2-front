@@ -1,0 +1,25 @@
+<div class="container">
+	<div class="row">
+		<div class="profile-nav col-md-4">
+	      <div class="panel">
+	          <div class="user-heading round">
+	              <a routerLink="">
+	                  <img class="img-fluid" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+	              </a>
+	              <h1>{{ user.fname }}</h1>
+	              <p>{{ user.email }}</p>
+	          </div>
+	          <ul class="nav nav-pills nav-stacked">
+	              <li class="w-100 p-3"><a class="w-100 p-3" routerLink="/mi-cuenta"> <i class="fa fa-user"></i> Resumen</a></li>
+	              <li class="w-100 p-3"><a class="w-100 p-3" routerLink="/mi-cuenta/pedidos"> <i class="fa fa-calendar"></i> Pedidos <span class="label label-warning pull-right r-activity">9</span></a></li>
+	              <li class="w-100 p-3"><a class="w-100 p-3" routerLink="/mi-cuenta/configuracion"> <i class="fa fa-edit"></i> Configuración</a></li>
+	          </ul>
+	      </div>
+		</div>
+		<div class="col-md-8">
+			<br><br>
+			<router-outlet></router-outlet>
+			<br><br>
+		</div>
+	</div>
+</div>

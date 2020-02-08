@@ -1,0 +1,12 @@
+.btn-link {
+  margin: 0 auto;
+  background-color: #814792;
+  padding: 1.1em;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  font-size: 0.9em;
+  font-weight: bold !important;
+  width: 200px;
+  text-decoration: none !important;
+}

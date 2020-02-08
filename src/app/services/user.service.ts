@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from '../models/user.model';
+import axios from "axios";
+import User from '../models/user.model';
 import { Response } from '../models/response.model';
 import { Observable } from 'rxjs';
 import { Params } from '@angular/router';
@@ -15,21 +16,99 @@ export class UserService {
 
   isVendor = false;
 
+  public user: User;
+
+  private cancelRequest = null;
+
   constructor(private http: HttpClient) { }
 
-  createUser(user: {username: string, fname: string, lname: string, email: string, password: string}): Observable<Response> {
-    return this.http.post<Response>(`${this.URI}/users`, user);
+  // Regresa la información del usuario que esté
+  // asociado al token almacenado en localStorage
+  // y lo guarda en this.user.
+  // @param token: string
+  // @return void
+  async getLoggedinUser(token: string) {
+    try {
+      const aux = await axios({
+        method: "get",
+        url: `${this.URI}/users`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+
+      const res: Response = aux.data;
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      this.user = res.data as User;
+      return this.user;
+    } catch (err) {
+      throw err;
+    }
   }
 
-  vendorRequest(user: {name: string, description: string, rut: string, activity: string}, token: any): Observable<Response> {
-    return this.http.post<Response>(`${this.URI}/stores`, user, { headers: new HttpHeaders({ Authorization: token }) });
+  async updatePassword(password: string, token: string): Promise<User> {
+    try {
+      const aux = await axios({
+        method: "put",
+        url: `${this.URI}/users/password`,
+        data: { password },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+
+      const res: Response = aux.data;
+
+      if (!res.ok) { throw res.err; }
+
+      return res.data as User;
+    } catch (err) {
+      throw err;
+    }
   }
 
-  getLoggedVendor(token: any): Observable<Response> {
-   return this.http.get<Response>(
-      this.URI + '/stores',
-      { headers: new HttpHeaders({ Authorization: token }) }
-    );
+  async createUser(user: User) {
+    try {
+      const aux = await axios({
+        method: "post",
+        url: `${this.URI}/users`,
+        data: user,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+
+      const res: Response = aux.data;
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      return res.data as User;
+    } catch (err) {
+      throw err;
+    }
   }
 
   forgotPassword(user: {username: string}): Observable<Response> {

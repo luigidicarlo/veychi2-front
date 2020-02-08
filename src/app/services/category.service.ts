@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Category } from '../models/category.model';
+import axios from "axios";
+import Category from '../models/category.model';
 import { Response } from '../models/response.model';
 import { environment } from '../../environments/environment';
 
@@ -10,34 +11,184 @@ import { environment } from '../../environments/environment';
 })
 export class CategoryService {
   
-  URI = environment.apiBase;
+  public category;
+  private URI = environment.apiBase;
+  private cancelRequest = null;
 
   //URI = 'http://veychi-api.herokuapp.com';
 
   constructor(private http: HttpClient) { }
 
-  getCategories(): Observable<Response> {
-    return this.http.get<Response>(`${this.URI}/categories`);
+  async getCategories() {
+    try {
+      const aux = await axios({
+        method: "get",
+        url: `${this.URI}/categories`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+      
+      const res: Response = aux.data;
+
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      this.category = res.data;
+      return this.category;
+    } catch (err) {
+      throw err;
+    }
   }
 
-  getCategory(id: string): Observable<Response> {
-    return this.http.get<Response>(`${this.URI}/categories/${id}`);
+  async getCategory(id: string) {
+    try {
+      const aux = await axios({
+        method: "get",
+        url: `${this.URI}/categories/${id}`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+
+      const res: Response = aux.data;
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      this.category = res.data;
+      return this.category;
+    } catch (err) {
+      throw err;
+    }
   }
 
-  getCategoryProduct(id: string): Observable<Response> {
-    return this.http.get<Response>(`${this.URI}/categories/${id}/products`);
+  async getCategoryProduct(id: string) {
+    try {
+      const aux = await axios({
+        method: "get",
+        url: `${this.URI}/categories/${id}/products`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+      
+      const res: Response = aux.data;
+
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      this.category = res.data;
+      return this.category;
+    } catch (err) {
+      throw err;
+    }
   }
 
-  createCategory(category: { name: string, parent: string, imageUrl: string }, token: any): Observable<Response> {
-    return this.http.post<Response>(`${this.URI}/categories`, category, { headers: new HttpHeaders({ Authorization: token }) });
+  async createCategory(category: Category, token: string) {
+    try {
+      const aux = await axios({
+        method: "post",
+        url: `${this.URI}/categories`,
+        data: category,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+
+      const res: Response = aux.data;
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      return res.data as Category;
+    } catch (err) {
+      throw err;
+    }
   }
 
-  updateCategory(id: string, category: { name: string, parent: string, imageUrl: string }, token: any): Observable<Response> {
-    return this.http.put<Response>(`${this.URI}/categories/${id}`, category, { headers: new HttpHeaders({ Authorization: token }) });
+  async updateCategory(id: string, category: Category, token: any) {
+    try {
+      const aux = await axios({
+        method: "put",
+        url: `${this.URI}/categories/${id}`,
+        data: category,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+
+      const res: Response = aux.data;
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      return res.data as Category;
+    } catch (err) {
+      throw err;
+    }
   }
 
-  deleteCategory(id: string, token): Observable<Response> {
-    return this.http.delete<Response>(`${this.URI}/categories/${id}`, { headers: new HttpHeaders({ Authorization: token }) });
+  async deleteCategory(id: string, token: string) {
+    try {
+      const aux = await axios({
+        method: "delete",
+        url: `${this.URI}/categories/${id}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+
+      const res: Response = aux.data;
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      return res.data as Category;
+    } catch (err) {
+      throw err;
+    }
   }
 
 }

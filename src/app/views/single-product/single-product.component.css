@@ -1,0 +1,51 @@
+ul {
+    list-style: none;
+    margin-bottom: 0px;
+}
+
+.p_specification {
+    font-weight: 500;
+    margin-left: 22px
+}
+ 
+.mt-10 {
+    margin-top: 10px
+}
+
+.row-underline {
+    content: "";
+    display: block;
+    border-bottom: 2px solid #3798db;
+    margin: 0px 0px;
+    margin-bottom: 20px;
+    margin-top: 15px
+}
+
+.deal-text {
+    margin-left: -10px;
+    font-size: 25px;
+    margin-bottom: 10px;
+    color: #000;
+    font-weight: 700
+}
+
+.section-title {
+    color: #212529;
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 30;
+    font-family: oswald;
+    text-decoration: none;
+    background-image: linear-gradient(to right, #c4366d, #c4366d);
+    background-position: bottom left;
+    background-repeat: no-repeat;
+    background-size: 50% 2px;
+    transition: background-size .5s ease;
+}
+
+.section-title:hover {
+    background-size: 100% 2px;
+}
+.ng-image-slider-lightbox {
+    z-index: 9999 !important;
+}

@@ -1,32 +1,38 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './components/views/home/home.component';
-import { ContactFormComponent } from './components/views/contact-form/contact-form.component';
-import { LoginComponent } from './components/views/login/login.component';
-import { RegisterComponent } from './components/views/register/register.component';
-import { SingleProductComponent } from './components/views/single-product/single-product.component';
-import { CartComponent } from './components/views/cart/cart.component';
-import { CheckoutComponent } from './components/views/checkout/checkout.component';
-import { VendorDashboardComponent } from './components/views/vendor-dashboard/vendor-dashboard.component';
-import { VendorHomeComponent } from './components/views/vendor-dashboard/vendor-home/vendor-home.component';
-import { VendorProductsComponent } from './components/views/vendor-dashboard/vendor-products/vendor-products.component';
-import { AddProductComponent } from './components/views/vendor-dashboard/add-product/add-product.component';
-import { VendorOrdersComponent } from './components/views/vendor-dashboard/vendor-orders/vendor-orders.component';
-import { VendorCouponsComponent } from './components/views/vendor-dashboard/vendor-coupons/vendor-coupons.component';
-import { AddCouponComponent } from './components/views/vendor-dashboard/add-coupon/add-coupon.component';
-import { ProductCategoryComponent } from './components/views/product-category/product-category.component';
-import { VendorRegisterComponent } from './components/views/vendor-register/vendor-register.component';
-import { VendorSettingsComponent } from './components/views/vendor-dashboard/vendor-settings/vendor-settings.component';
-import { VendorStatsComponent } from './components/views/vendor-dashboard/vendor-stats/vendor-stats.component';
-import { PasswordRecoveryComponent } from './components/views/password-recovery/password-recovery.component';
-import { ForgotPasswordComponent } from './components/views/forgot-password/forgot-password.component';
-import { AdminDashboardComponent } from './components/views/admin-dashboard/admin-dashboard.component';
-import { AdminCategoriesComponent } from './components/views/admin-dashboard/admin-categories/admin-categories.component';
-import { AdminHomeComponent } from './components/views/admin-dashboard/admin-home/admin-home.component';
-import { CategoriesComponent } from './components/views/admin-dashboard/categories/categories.component';
-import { VendorsRequestComponent } from './components/views/admin-dashboard/vendors-request/vendors-request.component';
-import { AdminUsersComponent } from './components/views/admin-dashboard/admin-users/admin-users.component';
-import { SearchComponent } from './components/views/search/search.component';
+import { HomeComponent } from './views/home/home.component';
+import { ContactFormComponent } from './views/contact-form/contact-form.component';
+import { LoginComponent } from './views/login/login.component';
+import { RegisterComponent } from './views/register/register.component';
+import { SingleProductComponent } from './views/single-product/single-product.component';
+import { CartComponent } from './views/cart/cart.component';
+import { CheckoutComponent } from './views/checkout/checkout.component';
+import { VendorDashboardComponent } from './views/vendor-dashboard/vendor-dashboard.component';
+import { VendorHomeComponent } from './views/vendor-dashboard/vendor-home/vendor-home.component';
+import { VendorProductsComponent } from './views/vendor-dashboard/vendor-products/vendor-products.component';
+import { AddProductComponent } from './views/vendor-dashboard/add-product/add-product.component';
+import { VendorOrdersComponent } from './views/vendor-dashboard/vendor-orders/vendor-orders.component';
+import { VendorCouponsComponent } from './views/vendor-dashboard/vendor-coupons/vendor-coupons.component';
+import { AddCouponComponent } from './views/vendor-dashboard/add-coupon/add-coupon.component';
+import { ProductCategoryComponent } from './views/product-category/product-category.component';
+import { VendorRegisterComponent } from './views/vendor-register/vendor-register.component';
+import { VendorSettingsComponent } from './views/vendor-dashboard/vendor-settings/vendor-settings.component';
+import { VendorStatsComponent } from './views/vendor-dashboard/vendor-stats/vendor-stats.component';
+import { PasswordRecoveryComponent } from './views/password-recovery/password-recovery.component';
+import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
+import { AdminDashboardComponent } from './views/admin-dashboard/admin-dashboard.component';
+import { AdminCategoriesComponent } from './views/admin-dashboard/admin-categories/admin-categories.component';
+import { AdminHomeComponent } from './views/admin-dashboard/admin-home/admin-home.component';
+import { CategoriesComponent } from './views/admin-dashboard/categories/categories.component';
+import { VendorsRequestComponent } from './views/admin-dashboard/vendors-request/vendors-request.component';
+import { AdminUsersComponent } from './views/admin-dashboard/admin-users/admin-users.component';
+import { SearchComponent } from './views/search/search.component';
+import { MiCuentaComponent } from './views/mi-cuenta/mi-cuenta.component';
+import { ResumenComponent } from './views/mi-cuenta/resumen/resumen.component';
+import { PedidosComponent } from './views/mi-cuenta/pedidos/pedidos.component';
+import { ConfiguracionComponent } from './views/mi-cuenta/configuracion/configuracion.component';
+import { ComoComprarComponent } from './views/como-comprar/como-comprar.component';
+import { ComoVenderComponent } from './views/como-vender/como-vender.component';
 
 const routes: Routes = [
   {
@@ -43,7 +49,7 @@ const routes: Routes = [
     component: ContactFormComponent
   },
   {
-    path: 'login',
+    path: 'inicio-sesion',
     component: LoginComponent
   },
   {
@@ -59,7 +65,7 @@ const routes: Routes = [
     component: SingleProductComponent
   },
   {
-    path: 'cart',
+    path: 'carrito',
     component: CartComponent
   },
   {
@@ -69,6 +75,31 @@ const routes: Routes = [
   {
     path: 'checkout',
     component: CheckoutComponent
+  },
+  {
+    path: 'como-comprar',
+    component: ComoComprarComponent
+  },
+  {
+    path: 'como-vender',
+    component: ComoVenderComponent
+  },
+  {
+    path: 'mi-cuenta',
+    component: MiCuentaComponent, children: [
+      {
+        path: '',
+        component: ResumenComponent
+      },
+      {
+        path: 'pedidos',
+        component: PedidosComponent
+      },
+      {
+        path: 'configuracion',
+        component: ConfiguracionComponent
+      }
+    ]
   },
   {
     path: 'vendor-panel',

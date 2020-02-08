@@ -1,0 +1,131 @@
+<ng-container *ngIf="user">
+  <div class="row">
+    <div class="col-md-10 mx-auto">
+      <h1>Tus datos personales</h1>
+      <p>Aquí puedes modificar los datos de tu cuenta.</p>
+      <form>
+        <div class="form-group mb-3">
+          <p>
+            <label>Nombre de Usuario</label>
+            <br />
+            <small>Tu nombre de usuario no se puede cambiar porque es tu identificador único
+              dentro del sitio</small>
+            <br />
+          </p>
+          <input type="text" class="form-control rounded-pill border-0 shadow-sm px-4" disabled [value]="user.username" />  
+        </div>
+      </form>                  
+      <form [formGroup]="userEditForm">                
+        <div class="form-group mb-3">
+          <label>Correo Electrónico</label>
+          <br />
+          <input
+            type="email"
+            formControlName="email"
+            placeholder="correo@ejemplo.com"
+            class="form-control rounded-pill border-0 shadow-sm px-4"
+            [value]="user.email"
+          />
+        </div>
+        <div class="form-group mb-3">
+          <label>Nombres</label>
+          <br />
+          <input
+            type="text"
+            formControlName="fname"
+            placeholder="Nombres..."
+            class="form-control rounded-pill border-0 shadow-sm px-4"
+            [value]="user.fname"
+          />
+        </div>
+        <div class="form-group mb-3">
+          <label>Apellidos</label>
+          <br />
+          <input
+            type="text"
+            formControlName="lname"
+            placeholder="Apellidos..."
+            class="form-control rounded-pill border-0 shadow-sm px-4"
+            [value]="user.lname"
+          />  
+        </div>
+        
+        <br />
+        <label>Imagen de Perfil</label>
+        <br />
+        <img
+          style="max-width: 320px; height: auto"
+          [src]="userImage"
+          [alt]="user.username"
+        />
+        <br />
+        <input type="file" formControlName="image" (change)="uploadImage()" />
+      </form>
+    </div>
+  </div>
+</ng-container>
+<div class="row">
+  <div class="col-md-10 mx-auto">
+    <h1>Actualización de contraseña</h1>
+    <p>
+      Deja en blanco los siguientes campos si no deseas actualizar tu contraseña.
+    </p>
+    <p>
+      Te recomendamos cambiar tu contraseña cada seis meses para mantener tu cuenta
+      segura.
+    </p>
+    <form [formGroup]="changePasswordForm" (ngSubmit)="onChangePasswordSubmit()">
+      <div class="form-group mb-3">
+        <label>Nueva Contraseña</label>
+        <br />
+        <input type="password" formControlName="password" class="form-control rounded-pill border-0 shadow-sm px-4" />
+        <p
+          style="margin: 0"
+          *ngIf="
+            changePasswordForm.get('password').touched &&
+            changePasswordForm.get('password').hasError('required')
+          "
+          class="text-danger"
+        >
+          Debes ingresar una nueva contraseña
+        </p>  
+      </div>
+      <div class="form-group mb-3">
+        <label>Repetir Contraseña</label>
+        <br />
+        <input type="password" formControlName="repeatPassword" class="form-control rounded-pill border-0 shadow-sm px-4" />
+        <p
+          style="margin: 0"
+          class="text-danger"
+          *ngIf="
+            changePasswordForm.get('repeatPassword').touched &&
+            (changePasswordForm.get('repeatPassword').value.length < 8 ||
+              changePasswordForm.get('repeatPassword').value.length > 32)
+          "
+        ></p>
+        <p
+          style="margin: 0"
+          class="text-danger"
+          *ngIf="
+            changePasswordForm.get('repeatPassword').touched &&
+            changePasswordForm.get('repeatPassword').hasError('required')
+          "
+        >
+          Debes ingresar nuevamente tu contraseña para confirmarla
+        </p>
+        <p
+          style="margin: 0"
+          class="text-danger"
+          *ngIf="
+            changePasswordForm.get('repeatPassword').touched &&
+            changePasswordForm.get('repeatPassword').hasError('matchPasswords')
+          "
+        >
+          Las contraseñas no coinciden
+        </p>
+      </div>
+      <button type="submit" [disabled]="changePasswordForm.invalid || isProcessing" class="btn bg-pink btn-block text-uppercase mb-2 rounded-pill shadow-sm">Cambiar Contraseña</button>
+    </form>
+  </div>
+</div>
+

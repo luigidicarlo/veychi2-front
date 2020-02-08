@@ -1,0 +1,115 @@
+<!-- BARRA DE NAVEGACIÓN -->
+<nav class="Navbar">
+  <div [class]="togglerClass" (click)="toggleNavbar()">
+    <div class="navbar-toggler-line"></div>
+    <div class="navbar-toggler-line"></div>
+    <div class="navbar-toggler-line"></div>
+  </div>
+
+  <div [class]="toggleClass">
+    <div class="navbar-brand">
+      <a routerLink="/">
+        <img
+          class="navbar-image"
+          src="../../../assets/img/logo-veychi-texto.png"
+          alt="Veychi"
+        />
+      </a>
+    </div>
+    <div class="navbar-search">
+      <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+        <input class="form-control" type="text" formControlName="s" id="s" placeholder="Buscar">
+        <button class="btn" type="submit">
+          <i class="fa fa-search"></i>
+        </button>
+      </form>
+    </div>
+    <div class="navbar-section">
+      <a (click)="toggleNavbar()" class="navbar-link" routerLink="/">
+        <i class="fa fa-home"></i>
+        <br />
+        Inicio
+      </a>
+      <a *ngIf="!isLoggedIn" (click)="toggleNavbar()" class="navbar-link" routerLink="/como-comprar">
+        <i class="fa fa-shopping-bag"></i>
+        <br />
+        Comprar
+      </a>
+      <a *ngIf="!isLoggedIn" (click)="toggleNavbar()" class="navbar-link" routerLink="/como-vender">
+        <i class="fa fa-dollar"></i>
+        <br />
+        Vender
+      </a>
+      <a (click)="toggleNavbar()" class="navbar-link" routerLink="/carrito">
+        <i class="fa fa-shopping-cart"></i>
+        <br />
+        Carrito
+      </a>
+      <a *ngIf="!isLoggedIn" (click)="toggleNavbar()" class="navbar-link" routerLink="/inicio-sesion">
+        <i class="fa fa-user"></i>
+        <br>
+        Sesión
+      </a>
+      <a *ngIf="isLoggedIn" (click)="toggleNavbar()" class="navbar-link" routerLink="/mi-cuenta">
+        <i class="fa fa-user"></i>
+        <br>
+        Mi Cuenta
+      </a>
+      <a *ngIf="isLoggedIn" (click)="logout()" class="navbar-link" routerLink="/">
+        <i class="fa fa-sign-out"></i>
+        <br>
+        Cerrar Sesión
+      </a>
+      <a *ngIf="!isLoggedIn" (click)="toggleNavbar()" class="navbar-link" routerLink="/register">
+        <i class="fa fa-sign-in"></i>
+        <br>
+        Registrarse
+      </a>
+      <a *ngIf="isLoggedIn" (click)="toggleNavbar()" class="navbar-link" routerLink="/registro-de-vendedores">
+        <i class="fa fa-sign-in"></i>
+        <br>
+        Registro Tienda
+      </a>
+      <!--
+      <a *ngIf="isLoggedIn" (click)="toggleNavbar()" class="navbar-link" routerLink="/contacto">
+        <i class="fa fa-comment"></i>
+        <br>
+        Contacto
+      </a>-->
+    </div>
+  </div>
+</nav>
+
+<!-- MENÚ DE NAVEGACIÓN -->
+<div class="menu text-center">
+      <a class="item-container w-100">
+        <div class="menu-item text-center">
+          <i class="fa fa-caret-right"></i>
+            Categorías
+        </div>
+      </a>
+    <a routerLink="/como-comprar" class="item-container w-100">
+        <div class="menu-item text-center">
+          <i class="fa fa-caret-right"></i>
+            Comprar
+        </div>
+      </a>
+      <a routerLink="/como-vender" class="item-container w-100">
+        <div class="menu-item text-center">
+          <i class="fa fa-caret-right"></i>
+            Vender
+        </div>
+      </a>
+      <a routerLink="/contacto" class="item-container w-100">
+        <div class="menu-item text-center">
+          <i class="fa fa-caret-right"></i>
+            Contacto
+        </div>
+      </a>
+      <a class="item-container w-100">
+        <div class="menu-item text-center">
+          <i class="fa fa-caret-right"></i>
+            FAQ
+        </div>
+      </a>
+  </div>

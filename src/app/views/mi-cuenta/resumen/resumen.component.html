@@ -1,0 +1,4 @@
+<div class="float-right">
+	<a routerLink="/admin-panel" class="btn bg-normal btn-block rounded-pill text-uppercase mb-2 p-3 text-white" *ngIf="user.role == 'ADMIN_ROLE'">Ir al administrador</a>
+	<a routerLink="/vendor-panel" class="btn bg-normal btn-block rounded-pill text-uppercase mb-2 p-3 text-white" *ngIf="hasStore">Ir al panel de tienda</a>
+</div>

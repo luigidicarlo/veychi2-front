@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import axios from "axios";
+import Product from '../models/product.model';
 import { Response } from '../models/response.model';
 import { environment } from '../../environments/environment';
 
@@ -9,29 +11,153 @@ import { environment } from '../../environments/environment';
 })
 export class ProductService {
   
-  URI = environment.apiBase;
+  public product: Product;
+  private URI = environment.apiBase;
+  private cancelRequest = null;
 
   constructor(private http: HttpClient) { }
 
-  getProducts(): Observable<Response> {
-  	return this.http.get<Response>(`${this.URI}/products`);
+  async getProducts() {
+    try {
+      const aux = await axios({
+        method: "get",
+        url: `${this.URI}/products`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+      
+      const res: Response = aux.data;
+
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      this.product = res.data as Product;
+      return this.product;
+    } catch (err) {
+      throw err;
+    }
   }
 
-  getProduct(id: string): Observable<Response> {
-    return this.http.get<Response>(`${this.URI}/products/${id}`);
+  async getProduct(id: string) {
+    try {
+      const aux = await axios({
+        method: "get",
+        url: `${this.URI}/products/${id}`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+
+      const res: Response = aux.data;
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      this.product = res.data as Product;
+      return this.product;
+    } catch (err) {
+      throw err;
+    }
   }
 
-  createProduct(product: {name: string, price: number, discount: number, description: string,
-    shortDescription: string, images: string[], tags: string[], category: string}, token): Observable<Response> {
-      return this.http.post<Response>(`${this.URI}/products`, product, { headers: new HttpHeaders({ Authorization: token }) });
+  async createProduct(product: Product, token: string) {
+    try {
+      const aux = await axios({
+        method: "post",
+        url: `${this.URI}/products`,
+        data: product,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+
+      const res: Response = aux.data;
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      return res.data as Product;
+    } catch (err) {
+      throw err;
+    }
   }
 
-  updateProduct(id: string, product: { name: string, price: number, discount: number, description: string, shortDescription: string, images: string[], tags: string[], category: string }, token: any): Observable<Response> {
-    return this.http.put<Response>(`${this.URI}/products/${id}`, product, { headers: new HttpHeaders({ Authorization: token }) });
+  async updateProduct(id: string, product: Product, token: any) {
+    try {
+      const aux = await axios({
+        method: "put",
+        url: `${this.URI}/products/${id}`,
+        data: product,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+
+      const res: Response = aux.data;
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      return res.data as Product;
+    } catch (err) {
+      throw err;
+    }
   }
 
-  deleteProduct(id: string, token): Observable<Response> {
-    return this.http.delete<Response>(`${this.URI}/products/${id}`, { headers: new HttpHeaders({ Authorization: token }) });
+  async deleteProduct(id: string, token: string) {
+    try {
+      const aux = await axios({
+        method: "delete",
+        url: `${this.URI}/products/${id}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+
+      const res: Response = aux.data;
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      return res.data as Product;
+    } catch (err) {
+      throw err;
+    }
   }
 
   sendFile(file, token): Observable<Response> {
