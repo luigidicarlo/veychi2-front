@@ -5,6 +5,7 @@ import axios from "axios";
 import Category from '../models/category.model';
 import { Response } from '../models/response.model';
 import { environment } from '../../environments/environment';
+import Product from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -76,7 +77,7 @@ export class CategoryService {
     }
   }
 
-  async getCategoryProduct(id: string) {
+  async getCategoryProduct(id: string) : Promise<Product[]> {
     try {
       const aux = await axios({
         method: "get",
@@ -93,12 +94,11 @@ export class CategoryService {
       
       const res: Response = aux.data;
 
-
       if (!res.ok) {
         throw res.err;
       }
 
-      this.category = res.data;
+      this.category = res.data as Product[];
       return this.category;
     } catch (err) {
       throw err;

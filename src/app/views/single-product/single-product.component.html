@@ -82,12 +82,14 @@
       <div class="row wow fadeIn">
 
         <!--Grid column-->
-        <div class="col-4 mb-4 mx-auto" *ngFor="let relatedProduct of relatedProducts | slice:0:3;">
-          <div class="text-center">
-            <a [routerLink]="['/single-product', relatedProduct._id]">
-              <img src="{{ relatedProduct.images[0] }}" class="img-fluid" width="300px" height="300px" alt="">
-            </a>
-            <h5 class="text-center">{{ relatedProduct.name }}</h5>
+        <div *ngIf="relatedProducts">
+          <div class="col-4 mb-4 mx-auto" *ngFor="let relatedProduct of relatedProducts | slice:0:3;">
+            <div class="text-center">
+              <a [routerLink]="['/single-product', relatedProduct._id]">
+                <img src="{{ relatedProduct.images[0] }}" class="img-fluid" width="300px" height="300px" alt="">
+              </a>
+              <h5 class="text-center">{{ relatedProduct.name }}</h5>
+            </div>
           </div>
         </div>
 

@@ -1,24 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import Product from '../../models/product.model';
-import Category from '../../models/category.model';
-import { ProductService } from '../../services/product.service';
-import { CategoryService } from '../../services/category.service';
+import { Component, OnInit } from "@angular/core";
+import Product from "../../models/product.model";
+import Category from "../../models/category.model";
+import { ProductService } from "../../services/product.service";
+import { CategoryService } from "../../services/category.service";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: "app-home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
-
-  products: Product;
-  categories: Category;
+  products: Product[];
+  categories: Category[];
   activeIndex: number = 0;
 
-  constructor(private productService: ProductService, private categoryService: CategoryService) { }
+  constructor(
+    private productService: ProductService,
+    private categoryService: CategoryService
+  ) {}
 
   ngOnInit() {
-  	this.showProducts();
+    this.showProducts();
     this.showCategories();
   }
 
@@ -34,12 +36,13 @@ export class HomeComponent implements OnInit {
 
   async showCategories() {
     try {
-      this.categories = await this.categoryService.getCategories().catch(err => {
-        throw err;
-      });
+      this.categories = await this.categoryService
+        .getCategories()
+        .catch(err => {
+          throw err;
+        });
     } catch (err) {
       console.log(err);
     }
   }
-
 }

@@ -9,7 +9,7 @@ import { ProductService } from '../../services/product.service';
 })
 export class ProductsListComponent implements OnInit {
 
-  products: Product;
+  products: Product[];
 
   actualPage: number = 1;
 

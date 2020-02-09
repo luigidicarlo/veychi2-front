@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment';
 })
 export class ProductService {
   
-  public product: Product;
+  public products: Product[];
   private URI = environment.apiBase;
   private cancelRequest = null;
 
@@ -39,14 +39,16 @@ export class ProductService {
         throw res.err;
       }
 
-      this.product = res.data as Product;
-      return this.product;
+      this.products = res.data as Product[];
+      return this.products;
     } catch (err) {
       throw err;
     }
   }
 
   async getProduct(id: string) {
+    let product: Product;
+
     try {
       const aux = await axios({
         method: "get",
@@ -67,8 +69,8 @@ export class ProductService {
         throw res.err;
       }
 
-      this.product = res.data as Product;
-      return this.product;
+      product = res.data as Product;
+      return product;
     } catch (err) {
       throw err;
     }

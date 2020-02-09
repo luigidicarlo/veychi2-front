@@ -12,7 +12,7 @@ import { Response } from '../../models/response.model';
 })
 export class ProductCategoryComponent implements OnInit {
 
-  products: Product;
+  products: Product[];
   storeID = null;
   auxStore: boolean = false;
   actualPage: number = 1;

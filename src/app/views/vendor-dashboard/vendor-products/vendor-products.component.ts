@@ -13,7 +13,7 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class VendorProductsComponent implements OnInit {
 
-  products: Product;
+  products: Product[];
 
   actualPage: number = 1;
 
