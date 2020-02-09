@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBase: 'http://veychi-api.herokuapp.com'
+  apiBase: 'https://veychi-api.herokuapp.com'
 };
