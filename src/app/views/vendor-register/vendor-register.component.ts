@@ -54,7 +54,9 @@ export class VendorRegisterComponent implements OnInit {
 
   ngOnInit() {
     this.token = this.auth.loadSession();
-    this.verifyVendor(this.token);
+    if(this.token) {
+      this.verifyVendor(this.token);
+    }    
     console.log(this.token);
   }
 
@@ -62,12 +64,12 @@ export class VendorRegisterComponent implements OnInit {
     this.submitted = true;
     const store = new Store (
       null,
-      this.vendorForm.get('name').value as string,
-      this.vendorForm.get('description').value as string,
+      this.vendorForm.get('storeName').value as string,
+      this.vendorForm.get('storeDescription').value as string,
       null,
       null,
       this.vendorForm.get('rut').value as string,
-      this.vendorForm.get('activity').value as string,
+      this.vendorForm.get('storeActivity').value as string,
       null,
       null,
       null,

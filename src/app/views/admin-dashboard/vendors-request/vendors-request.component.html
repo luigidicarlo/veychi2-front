@@ -3,34 +3,36 @@
 <br>
 <div id="accordion">
     <div class="card" *ngFor="let vendor of vendors | paginate: {itemsPerPage: 10, currentPage: actualPage}; let i = index">
-      <div class="card-header">
-        <h6 class="mb-0">
-          <p>{{ vendor.name }}</p>
-          <div class="float-right" data-toggle="collapse" [attr.data-target] = "'#Id'+i" aria-expanded="false" aria-controls="collapseOne">
-            <i class="fa fa-chevron-down"></i>
-          </div>
-        </h6>
-      </div>
-  
-      <div id="{{'Id'+i}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-        <div class="card-body">
-          <p>
-            Nombre de la tienda: <span><b>{{ vendor.name }}</b></span>
-          </p>
-          <p>
-            Actividad: <span><b>{{ vendor.activity }}</b></span>
-          </p>
-          <p>
-            RUT: <span><b>{{ vendor.rut }}</b></span>
-          </p>
-            <br>
-          <p>Descripción: </p>
-          <p>{{ vendor.description }}</p>
-          <br>
-          <button class="btn btn-success float-right" (click)="verifyVendor(vendor._id)">Aprobar</button>
-          <br><br>
+      <ng-container *ngIf="!vendor.enabled">
+        <div class="card-header">
+          <h6 class="mb-0">
+            <p>{{ vendor.name }}</p>
+            <div class="float-right" data-toggle="collapse" [attr.data-target] = "'#Id'+i" aria-expanded="false" aria-controls="collapseOne">
+              <i class="fa fa-chevron-down"></i>
+            </div>
+          </h6>
         </div>
-      </div>
+  
+        <div id="{{'Id'+i}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="card-body">
+            <p>
+              Nombre de la tienda: <span><b>{{ vendor.name }}</b></span>
+            </p>
+            <p>
+              Actividad: <span><b>{{ vendor.activity }}</b></span>
+            </p>
+            <p>
+              RUT: <span><b>{{ vendor.rut }}</b></span>
+            </p>
+              <br>
+            <p>Descripción: </p>
+            <p>{{ vendor.description }}</p>
+            <br>
+            <button class="btn btn-success float-right" (click)="verifyVendor(vendor._id)">Aprobar</button>
+            <br><br>
+          </div>
+        </div>
+      </ng-container>
     </div>
 </div>
 <br><br>

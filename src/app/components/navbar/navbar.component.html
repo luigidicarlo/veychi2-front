@@ -82,10 +82,17 @@
 
 <!-- MENÚ DE NAVEGACIÓN -->
 <div class="menu text-center">
-      <a class="item-container w-100">
+      <a class="item-container w-100 dropdown">
         <div class="menu-item text-center">
           <i class="fa fa-caret-right"></i>
             Categorías
+        </div>
+        <div class="dropdown-content">
+            <ng-container *ngFor="let category of categories">
+              <a [routerLink]="['/categorias', category._id]">    
+                {{ category.name }}
+              </a>
+            </ng-container>            
         </div>
       </a>
     <a routerLink="/como-comprar" class="item-container w-100">

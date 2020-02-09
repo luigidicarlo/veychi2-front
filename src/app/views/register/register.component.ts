@@ -85,7 +85,6 @@ export class RegisterComponent implements OnInit {
       });
       this.registered = true;
       this.submitted = false;
-      this.router.navigate(['/registro-de-vendedores']);
       Swal.fire({
         title: "Usuario registrado",
         icon: "success",
