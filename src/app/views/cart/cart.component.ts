@@ -9,6 +9,7 @@ import { CartService } from '../../services/cart.service';
 import { AuthService } from '../../services/auth.service';
 import { CouponService } from '../../services/coupon.service';
 import { OrderService } from '../../services/order.service';
+import { PaymentService } from '../../services/payment.service';
 
 @Component({
   selector: 'app-cart',
@@ -38,6 +39,7 @@ export class CartComponent implements OnInit {
     public orderService: OrderService,
     public couponService: CouponService,
     public auth: AuthService,
+    public payment: PaymentService,
     private router: Router
   ) { }
 
@@ -106,15 +108,26 @@ export class CartComponent implements OnInit {
     try {      
       const orderSubmitted = await this.orderService.createOrder(order, this.token).catch(err => {
         throw err;
-      });
+      }) as any;
 
       Swal.fire({
         title: "Pedido realizado",
         text: `Se realizado un pedido exitosamente. Para más información revise la información del pedido en su perfil`,
         icon: "success"
       });
-      this.cartService.deleteAllProducts();
-      this.router.navigateByUrl("/mi-cuenta/pedidos");
+
+
+      // POST A LA RESPUESTA DE LA API DE UN PEDIDO
+      const paymentRequested = await this.payment.requestPayment(orderSubmitted.url, orderSubmitted.inputName, orderSubmitted.token).catch(err => {
+        throw err;
+      }) as any;
+
+      const redirectionRequested = await this.payment.requestRedirection(paymentRequested.url, paymentRequested.inputName, paymentRequested.token).catch(err => {
+        throw err;
+      }) as any;
+
+      // this.cartService.deleteAllProducts();
+      // this.router.navigateByUrl("/mi-cuenta/pedidos");
     } catch (err) {
       Swal.fire({
         title: "Error",

@@ -11,7 +11,7 @@ export class CouponService {
 
   public coupon;
   private URI = environment.apiBase;
-  private cancelRequest = null;  
+  private cancelRequest = null;
 
   constructor() { }
 
