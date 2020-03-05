@@ -12,6 +12,7 @@ export class CartService {
   saveInCart(product: any) {
   	this.products.push(product);
     localStorage.setItem('cart', JSON.stringify(this.products));
+    console.log(this.products);
   }
 
   getCart() {
@@ -19,7 +20,12 @@ export class CartService {
   }
 
   async updateCart(products: any[]) {
+    localStorage.removeItem('cart');
     localStorage.setItem('cart', JSON.stringify(products));
+  }
+
+  deleteAllProducts() {
+    localStorage.removeItem('cart');
   }
 
 }

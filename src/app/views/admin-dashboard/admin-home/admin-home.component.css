@@ -1,0 +1,19 @@
+.menu-item {
+	cursor: pointer;
+	transform:scale(1);
+    -ms-transform:scale(1); /* IE 9 */
+    -moz-transform:scale(1); /* Firefox */
+    -webkit-transform:scale(1); /* Safari and Chrome */
+    -o-transform:scale(1); /* Opera  */
+    -webkit-transition: all 500ms ease-in-out; /* IE 9 */
+    -moz-transition: all 500ms ease-in-out; /* Firefox */
+    -ms-transition: all 500ms ease-in-out; /* Safari and Chrome */
+    -o-transition: all 500ms ease-in-out; /* Opera  */
+}
+.menu-item:hover {
+	transform:scale(1.05);
+    -ms-transform:scale(1.03); /* IE 9 */
+    -moz-transform:scale(1.03); /* Firefox */ 
+    -webkit-transform:scale(1.03); /* Safari and Chrome */
+    -o-transform:scale(1.03); /* Opera  */
+}

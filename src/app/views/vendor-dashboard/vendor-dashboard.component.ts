@@ -26,7 +26,6 @@ export class VendorDashboardComponent implements OnInit {
         throw err;
       });
       if(this.store) {
-        console.log("tienda");
         this.hasStore = true;
       }
     } catch (err) {

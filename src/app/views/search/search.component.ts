@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import Product from 'src/app/models/product.model';
-import { Response } from 'src/app/models/response.model';
 import { ProductService } from '../../services/product.service';
 
 @Component({
@@ -32,20 +31,13 @@ export class SearchComponent implements OnInit {
       this.allProducts = await this.productService.getProducts().catch(err => {
         throw err;
       });
+      
       const lastIndex = this.router.url.lastIndexOf("/");
       const url = this.router.url.substring(lastIndex + 1);
-      const parameters = url.split("%2B");      
-      const items = this.allProducts;
-      items.forEach((item) => {
-        item.tags.forEach((tag) => {
-            parameters.forEach((parameter) => {
-                if(tag.toLowerCase() == parameter.toLowerCase()) {
-                  this.products.push(item);                  
-                }
-            });
-        });
-      });
-      
+      const parameters = url.split("%2B").join(' ').toLowerCase();;
+      this.products = this.allProducts.filter((p) =>
+        p.name.toLowerCase().indexOf(parameters.toLowerCase()) > -1
+      );
     } catch (err) {
       console.log(err);
     }

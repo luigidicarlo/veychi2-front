@@ -1,4 +1,5 @@
 <div class="container">
+    <!-- Productos por categorías -->
     <div class="row" *ngIf="!auxStore">
         <ng-container *ngIf="storeID == null">
             <div class="col-md-9 mx-auto">
@@ -24,22 +25,49 @@
             <app-category-list></app-category-list>
         </div>
     </div>
+
+    <!-- Productos por tienda -->
     <div class="row" *ngIf="auxStore">
         <ng-container *ngIf="storeID != null">
 
-            <div class="col-md-3 mx-auto" *ngIf="products.length">
+            <div class="col-md-3 mx-auto d-none d-md-block" *ngIf="products">
                 <br>
                 <div class="text-center">
-                    <img class="img-fluid" src="{{ products[0].store.imageUrl }}">    
+                    <img class="img-fluid" src="{{ products == null ? '' : products[0].store.imageUrl }}">    
                 </div>
                 <br>                
-                <h5 class="text-center">{{ products[0].store.name }}</h5>
-                <p class="text-center">{{ products[0].store.description }}</p>
+                <ul class="text-left categories">
+                    <li *ngFor="let category of categories">
+                        <a routerLink="/categorias/{{ category.category._id }}">
+                            <i class="fa fa-angle-double-right"></i> {{ category.category.name }}
+                        </a>
+                        <hr>
+                    </li>
+                </ul>
             </div>
-            <div class="col-md-9 mx-auto">
+            <div class="row mt-4 d-md-none" *ngIf="products">
+                <div class="col-3">
+                    <div class="text-center">
+                        <img class="img-fluid" src="{{ products == null ? '' : products[0].store.imageUrl }}">    
+                    </div>
+                </div>
+                <div class="col-9">
+                    <img class="img-fluid" src="{{ products == null ? '' : products[0].store.bannerUrl }}">
+                </div>
+            </div>    
+            <div class="col-md-9 mx-auto" *ngIf="products">
                 <br>
-                <div class="row" *ngIf="products.length">
-                    <h1 class="section-title text-center">{{ products[0].store.name }}</h1>
+                <div class="row d-none d-md-flex" *ngIf="products[0].store.bannerUrl">
+                    <div class="col-md-12">
+                        <img class="img-fluid" src="{{ products == null ? '' : products[0].store.bannerUrl }}">
+                    </div>
+                </div>
+                <div class="menu text-center d-md-none">
+                  <a routerLink="" class="item-container w-100" *ngFor="let category of categories">
+                    <div class="menu-item text-center">
+                        {{ category.category.name }}
+                    </div>
+                  </a>
                 </div>
                 <br>
                 <div class="card-columns">
@@ -48,8 +76,7 @@
                             <a [routerLink]="['/single-product', product._id]"><img class="img-fluid" src="{{ product.images[0] }}" alt="..."></a>
                             <div class="card-body">
                                 <h5 class="card-title text-center">{{ product.name }}</h5>
-                                <p class="card-text text-center">{{ product.price }} CLP</p>
-                                <button type="submit" class="btn bg-pink btn-block text-uppercase mb-2" [routerLink]="['/single-product', product._id]">Ver</button>
+                                <button type="submit" class="btn bg-pink rounded-pill btn-block text-uppercase mb-2" [routerLink]="['/single-product', product._id]">{{ product.price }} CLP</button>
                             </div>
                         </div>
                     </ng-container>

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import Swal from "sweetalert2";
 import { CategoryService } from '../../../services/category.service';
 import { AuthService } from '../../../services/auth.service';
-import { Response } from '../../../models/response.model';
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
@@ -25,6 +24,7 @@ export class CategoriesComponent implements OnInit {
       this.categories = await this.categoryService.getCategories().catch(err => {
         throw err;
       });
+      console.log(this.categories);
     } catch (err) {
       console.log(err);
     }

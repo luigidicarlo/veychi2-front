@@ -23,9 +23,11 @@ import { ForgotPasswordComponent } from './views/forgot-password/forgot-password
 import { AdminDashboardComponent } from './views/admin-dashboard/admin-dashboard.component';
 import { AdminCategoriesComponent } from './views/admin-dashboard/admin-categories/admin-categories.component';
 import { AdminHomeComponent } from './views/admin-dashboard/admin-home/admin-home.component';
+import { AdminOrdersComponent } from './views/admin-dashboard/admin-orders/admin-orders.component';
 import { CategoriesComponent } from './views/admin-dashboard/categories/categories.component';
 import { VendorsRequestComponent } from './views/admin-dashboard/vendors-request/vendors-request.component';
 import { AdminUsersComponent } from './views/admin-dashboard/admin-users/admin-users.component';
+import { VentasComponent } from './views/admin-dashboard/ventas/ventas.component';
 import { SearchComponent } from './views/search/search.component';
 import { MiCuentaComponent } from './views/mi-cuenta/mi-cuenta.component';
 import { ResumenComponent } from './views/mi-cuenta/resumen/resumen.component';
@@ -188,6 +190,14 @@ const routes: Routes = [
       {
         path: 'usuarios',
         component: AdminUsersComponent
+      },
+      {
+        path: 'ventas',
+        component: VentasComponent
+      },
+      {
+        path: 'pedidos',
+        component: AdminOrdersComponent
       }
     ]
   }

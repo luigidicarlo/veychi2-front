@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Response } from '../../models/response.model';
+import Swal from "sweetalert2";
 import { UserService } from '../../services/user.service';
 import { from } from 'rxjs';
 
@@ -16,7 +16,7 @@ export class ForgotPasswordComponent implements OnInit {
   });  
 
   aux = false;
-  token = '';
+  token: any;
   submitted = false;
   error = false;
 
@@ -25,28 +25,27 @@ export class ForgotPasswordComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.submitted = true;
     const user = {
       username: this.passwordForm.get('username').value as string,
-    };
-
-    this.userService.forgotPassword(user).subscribe(
-      (res: Response) => {
-        if(res.ok) {
-          this.aux = true;
-          this.token = res.data;
-          console.log(res);
-          console.log(this.token);
-          this.submitted = false;
-        }
-      },
-      err => {
-        console.log(err);
-        this.submitted = false;
-        this.error = true;
-      }
-    );
+    };    
+    try {
+      this.token = await this.userService.forgotPassword(user).catch(err => {
+        throw err;
+      });
+      this.aux = true;      
+      console.log(this.token);
+      this.submitted = false;
+    } catch (err) {
+      this.submitted = false;
+      this.error = true;
+      Swal.fire({
+        title: "Error",
+        text: "Este usuario no existe o está mal escrito",
+        icon: "error"
+      });      
+    }
   }
 
 }

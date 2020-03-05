@@ -1,4 +1,4 @@
-<main class="mt-5 pt-4">
+<main class="pt-2">
     <div class="container dark-grey-text mt-5">
 
       <!--Grid row-->
@@ -7,7 +7,7 @@
         <!--Grid column-->
         <div class="col-md-6 mb-4">
 
-          <img src="{{ product.images[0] }}" class="img-fluid mb-3" alt="">
+          <img src="{{ product == null ? '' : product.images[0] }}" class="img-fluid mb-3" alt="">
           <ng-image-slider [images]="productImages" #nav></ng-image-slider>
 
         </div>
@@ -20,8 +20,8 @@
           <div class="p-4">
 
             <div class="mb-3" *ngIf="product">
-              <a [routerLink]="['/categorias', product.category._id]">
-                <span class="badge purple mr-1">{{ product.category.name }}</span>
+              <a [routerLink]="['/categorias', product == null ? '' : product.category._id]">
+                <span class="badge purple mr-1">{{ product == null ? '' : product.category.name }}</span>
               </a>
             </div>
 
@@ -29,12 +29,12 @@
               <span class="mr-1">
                 <del>$200</del>
               </span>
-              <span>{{ product.price }}</span>
+              <span>{{ product == null ? '' : product.price }}</span>
             </p>
-            <h1>{{ product.name }}</h1>
+            <h1>{{ product == null ? '' : product.name }}</h1>
             <p class="lead font-weight-bold">Descripción</p>
 
-            <p>{{ product.shortDescription }}</p>
+            <p>{{ product == null ? '' : product.shortDescription }}</p>
 
             <form class="d-flex justify-content-left">
               <!-- Default input -->
@@ -48,7 +48,7 @@
             <br>            
             <div class="mb-3" *ngIf="product">
               <a [routerLink]="['/vendor-products', product.store._id]">                
-                <span style="font-size: 18px;" class="badge purple mr-1">{{ product.store.name }}</span>
+                <span style="font-size: 18px;" class="badge purple mr-1">{{ product == null ? '' : product.store.name }}</span>
               </a>
             </div>
 
@@ -68,7 +68,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <p>{{ product.description }}</p>
+            <p>{{ product == null ? '' : product.description }}</p>
         </div>
     </div>
 
@@ -78,11 +78,8 @@
         <h1 class="section-title text-center">PRODUCTOS RELACIONADOS</h1>
       </div>
 
-      <!--Grid row-->
-      <div class="row wow fadeIn">
-
         <!--Grid column-->
-        <div *ngIf="relatedProducts">
+        <div class="row wow fadeIn mx-auto" *ngIf="relatedProducts">
           <div class="col-4 mb-4 mx-auto" *ngFor="let relatedProduct of relatedProducts | slice:0:3;">
             <div class="text-center">
               <a [routerLink]="['/single-product', relatedProduct._id]">
@@ -92,8 +89,6 @@
             </div>
           </div>
         </div>
-
-      </div>
       <!--Grid row-->
 
     </div>

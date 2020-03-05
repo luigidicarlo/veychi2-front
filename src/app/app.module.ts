@@ -7,6 +7,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ChartsModule } from 'ng2-charts';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { TagInputModule } from 'ngx-chips';
+import { QRCodeModule } from 'angularx-qrcode';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,7 +42,6 @@ import { AdminDashboardComponent } from './views/admin-dashboard/admin-dashboard
 import { AdminCategoriesComponent } from './views/admin-dashboard/admin-categories/admin-categories.component';
 import { AdminHomeComponent } from './views/admin-dashboard/admin-home/admin-home.component';
 import { CategoriesComponent } from './views/admin-dashboard/categories/categories.component';
-import { EditCategoryComponent } from './views/admin-dashboard/edit-category/edit-category.component';
 import { VendorsRequestComponent } from './views/admin-dashboard/vendors-request/vendors-request.component';
 import { AdminUsersComponent } from './views/admin-dashboard/admin-users/admin-users.component';
 import { SearchComponent } from './views/search/search.component';
@@ -49,6 +51,8 @@ import { PedidosComponent } from './views/mi-cuenta/pedidos/pedidos.component';
 import { ResumenComponent } from './views/mi-cuenta/resumen/resumen.component';
 import { ComoComprarComponent } from './views/como-comprar/como-comprar.component';
 import { ComoVenderComponent } from './views/como-vender/como-vender.component';
+import { VentasComponent } from './views/admin-dashboard/ventas/ventas.component';
+import { AdminOrdersComponent } from './views/admin-dashboard/admin-orders/admin-orders.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +86,6 @@ import { ComoVenderComponent } from './views/como-vender/como-vender.component';
     AdminCategoriesComponent,
     AdminHomeComponent,
     CategoriesComponent,
-    EditCategoryComponent,
     VendorsRequestComponent,
     AdminUsersComponent,
     SearchComponent,
@@ -91,7 +94,9 @@ import { ComoVenderComponent } from './views/como-vender/como-vender.component';
     PedidosComponent,
     ResumenComponent,
     ComoComprarComponent,
-    ComoVenderComponent
+    ComoVenderComponent,
+    VentasComponent,
+    AdminOrdersComponent
   ],
   imports: [
     BrowserModule,
@@ -102,7 +107,10 @@ import { ComoVenderComponent } from './views/como-vender/como-vender.component';
     NgxPaginationModule,
     ChartsModule,
     NgImageSliderModule,
-    TagInputModule
+    TagInputModule,
+    QRCodeModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

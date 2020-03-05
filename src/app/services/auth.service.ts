@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from "@angular/core";
 import axios from "axios";
-import { Response } from "../models/response.model";
+import Response from "../models/resp.model";
 import { environment } from 'src/environments/environment';
 import User from '../models/user.model';
 

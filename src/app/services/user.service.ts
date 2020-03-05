@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import axios from "axios";
 import User from '../models/user.model';
-import { Response } from '../models/response.model';
+import Response from '../models/resp.model';
 import { Observable } from 'rxjs';
 import { Params } from '@angular/router';
 import { environment } from '../../environments/environment';
@@ -102,7 +102,8 @@ export class UserService {
       const res: Response = aux.data;
 
       if (!res.ok) {
-        throw res.err;
+        console.log(res);
+        throw res;
       }
 
       return res.data as User;
@@ -111,12 +112,60 @@ export class UserService {
     }
   }
 
-  forgotPassword(user: {username: string}): Observable<Response> {
-    return this.http.post<Response>(`${this.URI}/password/token`, user);
+  async forgotPassword(user: {username: string}) {
+    try {
+      const aux = await axios({
+        method: "post",
+        url: `${this.URI}/password/token`,
+        data: user,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+
+      const res: Response = aux.data;
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
   }
 
-  recoverPassword(user: {password: string, token: any}): Observable<Response> {
-    return this.http.post<Response>(`${this.URI}/password/recovery-change`, user);
-  }
+  async recoverPassword(user: {password: string, token: string}) {
+    try {
+      const aux = await axios({
+        method: "post",
+        url: `${this.URI}/password/recovery-change`,
+        data: user,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+
+      const res: Response = aux.data;
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      return res.data as User;
+    } catch (err) {
+      throw err;
+    }
+  }  
 
 }

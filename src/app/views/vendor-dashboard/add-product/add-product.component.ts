@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from "sweetalert2";
 import { Router, ActivatedRoute } from '@angular/router';
 import Product from '../../../models/product.model';
-import { Response } from '../../../models/response.model';
 import { ProductService } from '../../../services/product.service';
 import { CategoryService } from '../../../services/category.service';
 import { AuthService } from '../../../services/auth.service';
@@ -17,7 +16,7 @@ export class AddProductComponent implements OnInit {
   productForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\'. -]+$'), Validators.minLength(3)]),
     price: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    discount: new FormControl('', Validators.compose([Validators.required, Validators.min(0), Validators.max(100)])),
+    discount: new FormControl('', Validators.compose([Validators.min(0), Validators.max(100)])),
     description: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(2000)]),
     shortDescription: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(200)]),
     images: new FormControl('', Validators.required),
@@ -48,6 +47,8 @@ export class AddProductComponent implements OnInit {
   }
 
   async onSubmit() {
+    Swal.fire("Procesando...");
+    Swal.showLoading();
     this.submitted = true;
     const tagtext = this.productForm.get('tags').value;
     console.log(tagtext);
@@ -103,6 +104,8 @@ export class AddProductComponent implements OnInit {
   }
 
   async onEdit() {
+    Swal.fire("Procesando...");
+    Swal.showLoading();
     this.submitted = true;
     const tagtext = this.productForm.get('tags').value;
     console.log(tagtext);
@@ -135,7 +138,7 @@ export class AddProductComponent implements OnInit {
         throw err;
       });      
       Swal.fire({
-        title: "Producto creado",
+        title: "Producto actualizado",
         icon: "success",
         html: `Se ha actualizado el producto ${updatedProduct.name}`
       });
@@ -171,20 +174,6 @@ export class AddProductComponent implements OnInit {
     } catch (err) {
       console.log(err);
     }
-  }
-
-  onUpload(event) {
-    console.log(event.target.files[0]);
-    this.selectedImage = <File>event.target.files[0];
-    const formData = new FormData();
-    formData.append('images', this.selectedImage);
-    console.log(formData);
-    this.productService.sendFile(formData, this.token).subscribe(
-      (res: Response) => {
-        console.log(res);
-      },
-      err => console.log(err)
-    );
   }
 
 }

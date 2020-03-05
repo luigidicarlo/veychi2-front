@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Order } from 'src/app/models/order.model';
+import Order from 'src/app/models/order.model';
+import { OrderService } from '../../../services/order.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-vendor-orders',
@@ -8,85 +10,26 @@ import { Order } from 'src/app/models/order.model';
 })
 export class VendorOrdersComponent implements OnInit {
 
-  orders: Order[] = [
-    {
-      image: 'https://veychi.com/wp-content/plugins/wc-frontend-manager/assets/images/avatar.png',
-      order: '#1955',
-      article: 'Zapatos',
-      buyer: 'Pablo Perez',
-      shippingAddress: 'Dirección genérica, Calle 7',
-      amount: 18000,
-      commission: 0,
-      date: ''
-    },
-    {
-      image: 'https://veychi.com/wp-content/plugins/wc-frontend-manager/assets/images/avatar.png',
-      order: '#1955',
-      article: 'Zapatos',
-      buyer: 'Pablo Perez',
-      shippingAddress: 'Dirección genérica, Calle 7',
-      amount: 18000,
-      commission: 0,
-      date: ''
-    },
-    {
-      image: 'https://veychi.com/wp-content/plugins/wc-frontend-manager/assets/images/avatar.png',
-      order: '#1955',
-      article: 'Zapatos',
-      buyer: 'Pablo Perez',
-      shippingAddress: 'Dirección genérica, Calle 7',
-      amount: 18000,
-      commission: 0,
-      date: ''
-    },
-    {
-      image: 'https://veychi.com/wp-content/plugins/wc-frontend-manager/assets/images/avatar.png',
-      order: '#1955',
-      article: 'Zapatos',
-      buyer: 'Pablo Perez',
-      shippingAddress: 'Dirección genérica, Calle 7',
-      amount: 18000,
-      commission: 0,
-      date: ''
-    },
-    {
-      image: 'https://veychi.com/wp-content/plugins/wc-frontend-manager/assets/images/avatar.png',
-      order: '#1955',
-      article: 'Zapatos',
-      buyer: 'Pablo Perez',
-      shippingAddress: 'Dirección genérica, Calle 7',
-      amount: 18000,
-      commission: 0,
-      date: ''
-    },
-    {
-      image: 'https://veychi.com/wp-content/plugins/wc-frontend-manager/assets/images/avatar.png',
-      order: '#1955',
-      article: 'Zapatos',
-      buyer: 'Pablo Perez',
-      shippingAddress: 'Dirección genérica, Calle 7',
-      amount: 18000,
-      commission: 0,
-      date: ''
-    },
-    {
-      image: 'https://veychi.com/wp-content/plugins/wc-frontend-manager/assets/images/avatar.png',
-      order: '#1955',
-      article: 'Zapatos',
-      buyer: 'Pablo Perez',
-      shippingAddress: 'Dirección genérica, Calle 7',
-      amount: 18000,
-      commission: 0,
-      date: ''
-    }
-    
-  ];
+  orders: Order;
+  token: string;
+  actualPage: number = 1;
 
-  actualPage: number = 1
-
-  constructor() { }
+  constructor(public orderService: OrderService, public auth: AuthService) { }
 
   ngOnInit() {
+    this.token = this.auth.loadSession();
+    this.showOrders(this.token);
+  }
+
+  async showOrders(token: string) {
+    try {
+      this.orders = await this.orderService.getOrders(token).catch(err => {
+        throw err;
+      });
+      console.log(this.orders);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
 }

@@ -4,22 +4,22 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="formGroupExampleInput">Nombre del Cupón</label>
-                    <input type="text" class="form-control" id="name" [(ngModel)]="singleCoupon.name" formControlName="name" placeholder="">
+                    <input type="text" class="form-control" id="name" [(ngModel)]="singleCoupon == null ? '' : singleCoupon.name" formControlName="name" placeholder="">
                 </div>                
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Tipo de cupón</label>
-                    <select class="form-control" formControlName="percentage" [(ngModel)]="singleCoupon.percentage">
+                    <select class="form-control" formControlName="percentage" [(ngModel)]="singleCoupon == null ? '' : singleCoupon.percentage">
                       <option value="false">Cantidad</option>
                       <option value="true">Porcentaje</option>
                     </select>
                 </div>
                 <div class="form-group">                    
                     <label for="exampleFormControlTextarea1">Valor de descuento del cupón</label>
-                    <input type="number" class="form-control" [(ngModel)]="singleCoupon.value" formControlName="value" placeholder="Ejemplo: 50">
+                    <input type="number" class="form-control" [(ngModel)]="singleCoupon == null ? '' : singleCoupon.value" formControlName="value" placeholder="Ejemplo: 50">
                 </div>
                 <div class="form-group">
                     <label for="formGroupExampleInput">Fecha de expiración del Cupón</label>
-                    <input type="text" class="form-control" id="expiration" [(ngModel)]="singleCoupon.expiration" formControlName="expiration" placeholder="">
+                    <input type="text" class="form-control" id="expiration" [(ngModel)]="singleCoupon == null ? '' : singleCoupon.expiration" formControlName="expiration" placeholder="">
                 </div>
                 <button type="submit" class="btn btn-primary" [disabled]="couponForm.invalid || submitted">Guardar</button>
                 <small class="form-text text-danger"
@@ -28,8 +28,5 @@
                 </small>
             </div>
         </div>
-    </form>
-    <form>
-        
     </form>
 </div>

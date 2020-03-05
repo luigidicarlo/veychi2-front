@@ -24,13 +24,27 @@
 	          <p>
 	            Correo: <span><b>{{ user.email }}</b></span>
 	          </p>
-	            <br>
+				<br>
+			  <!--
 	          <p *ngIf="user.role == 'CLIENT_ROLE'">
 	            Rol del usuario: <span><b>Cliente</b></span>
 	          </p>
 	          <p *ngIf="user.role == 'ADMIN_ROLE'">
 	            Rol del usuario: <span><b>Administrador</b></span>
-	          </p>
+			  </p>-->
+			  <form [formGroup]="roleForm" (ngSubmit)="onSubmit(user._id)">
+				<div class="form-group">
+					<label for="formGroupExampleInput2">Rol del usuario</label>
+					<div class="d-flex">
+						<select class="form-control" [(ngModel)]="user.role" formControlName="role">
+							<option value="ADMIN_ROLE">Administrador</option>
+							<option value="CLIENT_ROLE">Cliente</option>
+							<!--<option *ngFor="let role of roles" value="{{ role.role }}">{{ role.name }}</option>-->
+						</select>
+						<button type="submit" class="btn btn-primary" [disabled]="submitted">Guardar</button>
+					</div>
+				</div>
+			  </form>
 	          <br>
 	          <button class="btn btn-danger float-right" (click)="eraseUser(user._id)">Borrar</button>
 	          <br><br>

@@ -2,15 +2,15 @@
 .image {
   min-height: 100vh;
 }
-.bg-pink,
+.bg-blue,
 .custom-control-input:checked~.custom-control-label::before {
-    background-color: #c4366d !important;
-    border-color: #c4366d !important;
+    background-color: #2587c4 !important;
+    border-color: #2587c4 !important;
     color: #fff;
 }
 
 .bg-image {
-  background-image: url('../../../assets/img/pexels-photo-555017.jpeg');
+  background-image: url('../../../assets/img/portrait-pretty-happy-girl-talking-mobile-phone final.jpg');
   background-size: cover;
-  background-position: center center;
+  background-position: left;
 }

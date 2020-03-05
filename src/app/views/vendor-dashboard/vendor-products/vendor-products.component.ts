@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from "sweetalert2";
 import Product from 'src/app/models/product.model';
-import { Response } from '../../../models/response.model';
 import { ProductService } from '../../../services/product.service';
 import { AuthService } from '../../../services/auth.service';
 
@@ -13,7 +12,7 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class VendorProductsComponent implements OnInit {
 
-  products: Product[];
+  products: Product;
 
   actualPage: number = 1;
 
@@ -31,7 +30,7 @@ export class VendorProductsComponent implements OnInit {
     try {
       this.products = await this.productService.getProducts().catch(err => {
         throw err;
-      });
+      }) as Product;
     } catch (err) {
       console.log(err);
     }
@@ -42,24 +41,37 @@ export class VendorProductsComponent implements OnInit {
   }
 
   async eraseProduct(id: string) {
-    try {
-      const deletedProduct = await this.productService.deleteProduct(id, this.token).catch(err => {
-        throw err;
-      });
-      this.showProducts();
-      Swal.fire({
-        title: "Producto eliminado",
-        icon: "success",
-        html: `El producto ${deletedProduct.name} ha sido eliminado`
-      });
-    } catch (err) {
-      Swal.fire({
-        title: "Error",
-        icon: "error",
-        html:
-          "Ha ocurrido un error al tratar de eliminar el producto. Intente de nuevo"
-      });
+    const result = await Swal.fire({
+      title: '¿Estás seguro?',
+      text: "No podrás revertirlo",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Borrar',
+      cancelButtonText: 'Cancelar'
+    });
+    if (result.value) {
+      try {
+        const deletedProduct = await this.productService.deleteProduct(id, this.token).catch(err => {
+          throw err;
+        });
+        this.showProducts();
+        Swal.fire(
+          'Producto eliminado',
+          'El producto ha sido eliminado',
+          'success'
+        )
+      } catch (err) {
+        Swal.fire({
+          title: "Error",
+          icon: "error",
+          html:
+            "Ha ocurrido un error al tratar de eliminar el producto. Intente de nuevo"
+        });
+      }
     }
+    
   }
 
 }

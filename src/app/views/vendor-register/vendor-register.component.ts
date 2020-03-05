@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from "sweetalert2";
 import Store from '../../models/store.model';
-import { Response } from '../../models/response.model';
 import { ConstantsService } from "src/app/services/constants.service";
 import { RegexService } from "src/app/services/regex.service";
 import { StoreService } from '../../services/store.service';
@@ -61,6 +60,8 @@ export class VendorRegisterComponent implements OnInit {
   }
 
   async onSubmit() {
+    Swal.fire("Procesando...");
+    Swal.showLoading();
     this.submitted = true;
     const store = new Store (
       null,

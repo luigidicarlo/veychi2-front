@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Response } from '../../models/response.model';
+import Swal from "sweetalert2";
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -29,26 +29,28 @@ export class PasswordRecoveryComponent implements OnInit {
     console.log(this.activatedRoute.snapshot.params.token);
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.submitted = true;
     const user = {
       password: this.recoverPasswordForm.get('password').value as string,
       token: this.activatedRoute.snapshot.params.token
     };
 
-    this.userService.recoverPassword(user).subscribe(
-      (res: Response) => {
-        if(res.ok) {
-          this.passwordChanged = true;
-          this.submitted = false;
-        }
-      },
-      err => {
-        console.log(err);
-        this.submitted = false;
-        this.error = true;
-      }
-    );
+    try {
+      const updatedUser = await this.userService.recoverPassword(user).catch(err => {
+        throw err;
+      });
+      this.passwordChanged = true;
+      this.submitted = false;
+    } catch (err) {
+      this.submitted = false;
+      this.error = true;
+      Swal.fire({
+        title: "Error",
+        text: "Ha ocurrido un error",
+        icon: "error"
+      });
+    }
   }
 
 }

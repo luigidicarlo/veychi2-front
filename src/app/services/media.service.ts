@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import axios from "axios";
-import { Response } from '../models/response.model';
+import Response from '../models/resp.model';
 import { environment } from '../../environments/environment';
 
 @Injectable({

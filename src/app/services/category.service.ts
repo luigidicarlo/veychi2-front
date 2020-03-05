@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import axios from "axios";
 import Category from '../models/category.model';
-import { Response } from '../models/response.model';
+import Response from '../models/resp.model';
 import { environment } from '../../environments/environment';
 import Product from '../models/product.model';
 
@@ -77,7 +77,7 @@ export class CategoryService {
     }
   }
 
-  async getCategoryProduct(id: string) : Promise<Product[]> {
+  async getCategoryProduct(id: string) {
     try {
       const aux = await axios({
         method: "get",
@@ -98,7 +98,7 @@ export class CategoryService {
         throw res.err;
       }
 
-      this.category = res.data as Product[];
+      this.category = res.data as Product;
       return this.category;
     } catch (err) {
       throw err;

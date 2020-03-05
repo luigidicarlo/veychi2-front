@@ -63,6 +63,8 @@ export class RegisterComponent implements OnInit {
   }
 
   async onSubmit() {
+    Swal.fire("Procesando...");
+    Swal.showLoading();
     this.submitted = true;
 
     const user = new User(

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from "sweetalert2";
-import { Response } from '../../../models/response.model';
 import Category from '../../../models/category.model';
 import { CategoryService } from '../../../services/category.service';
 import { AuthService } from '../../../services/auth.service';
@@ -38,8 +37,10 @@ export class AdminCategoriesComponent implements OnInit {
   }
 
   async onSubmit() {
+    Swal.fire("Procesando...");
+    Swal.showLoading();
     this.submitted = true;
-    this.fillFields();
+    this.fillData();
     console.log(this.category);
     try {
       const createdCategory = await this.categoryService.createCategory(this.category, this.token).catch(err => {
@@ -65,8 +66,10 @@ export class AdminCategoriesComponent implements OnInit {
   }
 
   async onEdit() {
+    Swal.fire("Procesando...");
+    Swal.showLoading();
     this.submitted = true;
-    this.fillFields();
+    this.fillData();
     console.log(this.category);
     console.log("Editando...");
     try {
@@ -92,12 +95,7 @@ export class AdminCategoriesComponent implements OnInit {
     }
   }
 
-  fillFields() {
-    if(this.edit && this.singleCategory != null) {
-
-      
-    }
-
+  fillData() {
     this.category = new Category(
       null,
       this.categoryForm.get('name').value as string,

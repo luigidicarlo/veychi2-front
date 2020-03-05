@@ -1,4 +1,6 @@
 <div class="table-responsive">
+  <a routerLink="/admin-panel/pedidos">Ver pedidos</a>
+  <a routerLink="/admin-panel">Ir al panel general</a>
   <a routerLink="/admin-panel/crear-categoria" class="btn btn-primary text-right btn-add float-right ">
     Crear categoría
   </a>
@@ -19,29 +21,29 @@
   
       <!--Table body-->
       <tbody>
-        <tr *ngFor="let category of categories">          
-          <td class="align-middle text-center">{{ category.name }}</td>
-          <td class="align-middle text-center">
-            <span class="discount-type" *ngIf="category.parent != null">
-              {{ category.parent.name }}
-            </span>
-            <span class="discount-type" style="color: red" *ngIf="category.parent == null">
-              Ninguno
-            </span>
-          </td>
-          <td class="align-middle text-center">
-              <img src="{{ category.imageUrl }}" width="50px">
-          </td>
-          <td class="align-middle text-center">
-            <a class="btn btn-primary" [routerLink]="['/admin-panel/editar-categoria', category._id]">Editar</a>
-            <br><br>
-            <button class="btn btn-warning" (click)="OnDelete(category._id)">Eliminar</button>
-          </td>
-        </tr>        
+        <tr *ngFor="let category of categories">
+          <ng-container *ngIf="category.active">                  
+            <td class="align-middle text-center">{{ category.name }}</td>
+            <td class="align-middle text-center">
+              <span class="discount-type" *ngIf="category.parent != null">
+                {{ category.parent.name }}
+              </span>
+              <span class="discount-type" style="color: red" *ngIf="category.parent == null">
+                Ninguno
+              </span>
+            </td>
+            <td class="align-middle text-center">
+                <img src="{{ category.imageUrl }}" width="50px">
+            </td>
+            <td class="align-middle text-center">
+              <a class="btn btn-primary" [routerLink]="['/admin-panel/editar-categoria', category._id]">Editar</a>
+              <br><br>
+              <button class="btn btn-warning" (click)="OnDelete(category._id)">Eliminar</button>
+            </td>
+          </ng-container>
+        </tr>
       </tbody>
       <!--Table body-->
     </table>
     <!--Table-->
-  
 </div>
-  

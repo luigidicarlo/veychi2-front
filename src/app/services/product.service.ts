@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import axios from "axios";
 import Product from '../models/product.model';
-import { Response } from '../models/response.model';
+import Response from '../models/resp.model';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -11,11 +9,11 @@ import { environment } from '../../environments/environment';
 })
 export class ProductService {
   
-  public products: Product[];
+  public products: Product|Product[];
   private URI = environment.apiBase;
   private cancelRequest = null;
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   async getProducts() {
     try {
@@ -39,7 +37,7 @@ export class ProductService {
         throw res.err;
       }
 
-      this.products = res.data as Product[];
+      this.products = res.data as Product|Product[];
       return this.products;
     } catch (err) {
       throw err;
@@ -160,9 +158,5 @@ export class ProductService {
     } catch (err) {
       throw err;
     }
-  }
-
-  sendFile(file, token): Observable<Response> {
-    return this.http.post<Response>(`${this.URI}/media`, file, { headers: new HttpHeaders({ Authorization: token }) });
   }
 }

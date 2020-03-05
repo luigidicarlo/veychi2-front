@@ -39,9 +39,10 @@
 			<ul class="text-left">
 				<li *ngFor="let category of categories | slice:0:5;">
 					<a routerLink="/categorias/{{ category._id }}">
-						<i class="fa fa-angle-double-right"></i> {{ category.name }}	
-					</a>					
-				</li>
+						<i class="fa fa-angle-double-right"></i> {{ category.name }}
+					</a>
+					<hr>
+				</li>				
 			</ul>
 		</div>
 		<div class="col-md-6 mx-auto">
@@ -76,3 +77,4 @@
         </div>    
     </div>    
 </div>
+<ngx-spinner></ngx-spinner>

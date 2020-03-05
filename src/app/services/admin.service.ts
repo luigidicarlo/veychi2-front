@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Response } from '../models/response.model';
+import axios from "axios";
+import Store from '../models/store.model';
+import Order from '../models/order.model';
+import User from '../models/user.model';
+import Response from '../models/resp.model';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -9,23 +11,184 @@ import { environment } from '../../environments/environment';
 })
 export class AdminService {
 
+  public order;
+  public user;
+  public store;
   URI = environment.apiBase;
+  private cancelRequest = null;
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
-  getVendorRequests(token: any): Observable<Response> {
-    return this.http.get<Response>(`${this.URI}/admin/stores`, { headers: new HttpHeaders({ Authorization: token }) });
+  async getVendorRequests(token: string) {
+    try {
+      const aux = await axios({
+        method: "get",
+        url: `${this.URI}/admin/stores`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+      
+      const res: Response = aux.data;
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      this.store = res.data;
+      return this.store as Store;
+    } catch (err) {
+      throw err;
+    }
   }
 
-  updateVendor(id: string, token: any): Observable<Response> {
-    return this.http.put<Response>(`${this.URI}/admin/stores/${id}`, {}, { headers: new HttpHeaders({ Authorization: token }) });
+  async getOrders(token: string) {
+    try {
+      const aux = await axios({
+        method: "get",
+        url: `${this.URI}/admin/orders`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+      
+      const res: Response = aux.data;
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      this.order = res.data;
+      return this.order as Order;
+    } catch (err) {
+      throw err;
+    }
   }
 
-  getUsers(token: any): Observable<Response> {
-  	return this.http.get<Response>(`${this.URI}/admin/users`, { headers: new HttpHeaders({ Authorization: token }) });	
+  async updateVendor(id: string, token: string) {
+    try {
+      const aux = await axios({
+        method: "put",
+        url: `${this.URI}/admin/stores/${id}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+
+      const res: Response = aux.data;
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      return res.data as Store;
+    } catch (err) {
+      throw err;
+    }
   }
 
-  deleteUser(id: string, token): Observable<Response> {
-    return this.http.delete<Response>(`${this.URI}/admin/users/${id}`, { headers: new HttpHeaders({ Authorization: token }) });
+  async getUsers(token: string) {
+    try {
+      const aux = await axios({
+        method: "get",
+        url: `${this.URI}/admin/users`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+      
+      const res: Response = aux.data;
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      this.user = res.data;
+      return this.user as User;
+    } catch (err) {
+      throw err;
+    }
   }
+
+  async updateUser(id: string, user: User, token: string) {
+    try {
+      const aux = await axios({
+        method: "put",        
+        url: `${this.URI}/admin/users/${id}`,
+        data: user,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+
+      const res: Response = aux.data;
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      return res.data as User;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async deleteUser(id: string, token: string) {
+    try {
+      const aux = await axios({
+        method: "delete",
+        url: `${this.URI}/admin/users/${id}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        cancelToken: new axios.CancelToken(c => {
+          this.cancelRequest = c;
+        })
+      }).catch(err => {
+        throw err;
+      });
+
+      const res: Response = aux.data;
+
+      if (!res.ok) {
+        throw res.err;
+      }
+
+      return res.data as User;
+    } catch (err) {
+      throw err;
+    }
+  }
+
 }

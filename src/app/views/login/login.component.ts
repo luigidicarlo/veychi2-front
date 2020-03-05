@@ -38,6 +38,8 @@ export class LoginComponent implements OnInit {
     this.isProcessing = true;
 
     try {
+      Swal.fire("Procesando...");
+      Swal.showLoading();
       const token = await this.auth.generateToken(loginData).catch(err => {
         throw err;
       });

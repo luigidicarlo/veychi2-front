@@ -9,7 +9,7 @@ import { ProductService } from '../../services/product.service';
 })
 export class ProductsListComponent implements OnInit {
 
-  products: Product[];
+  products: Product;
 
   actualPage: number = 1;
 
@@ -23,7 +23,7 @@ export class ProductsListComponent implements OnInit {
     try {
       this.products = await this.productService.getProducts().catch(err => {
         throw err;
-      });
+      }) as Product;
     } catch (err) {
       console.log(err);
     }

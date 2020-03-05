@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from "sweetalert2";
 import { AuthService } from '../../../services/auth.service';
 import { AdminService } from '../../../services/admin.service';
-import { Response } from '../../../models/response.model';
 
 @Component({
   selector: 'app-vendors-request',
@@ -18,30 +18,58 @@ export class VendorsRequestComponent implements OnInit {
 
   ngOnInit() {
     this.token = this.auth.loadSession();
-    this.showVendorRequest();
+    this.showVendorRequest(this.token);
   }
 
-  showVendorRequest() {
-    this.adminService.getVendorRequests(this.token).subscribe(
-      (res: Response) => {        
-        if(res.ok) {
-          this.vendors = res.data;
-          console.log(this.vendors);
-        }        
-      },
-      err => console.log(err)
-    );
+  // Método para obtener a todos las tiendas pendientes por aprobación
+  async showVendorRequest(token: string) {
+    try {
+      this.vendors = await this.adminService.getVendorRequests(token).catch(err => {
+        throw err;
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  verifyVendor(id: string) {
-    console.log(this.token);
-    this.adminService.updateVendor(id, this.token).subscribe(
-      (res) => {
-        console.log(res);
-        this.showVendorRequest();
-      },
-      err => console.error(err)
-    );
+  // Método para aprobar a una tienda.
+  async verifyVendor(id: string) {
+
+    // Modal para confirmar si se desea aprobar la petición
+    const result = await Swal.fire({
+      title: '¿Estás seguro?',
+      text: "No podrás revertirlo",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Borrar',
+      cancelButtonText: 'Cancelar'
+    });
+
+    // Aprobando tienda si se confirma la petición
+    if (result.value) {
+      Swal.fire("Procesando...");
+      Swal.showLoading();
+      try {
+        const updatedVendor = await this.adminService.updateVendor(id, this.token).catch(err => {
+          throw err;
+        });
+        this.showVendorRequest(this.token);
+        Swal.fire(
+          'Tienda aprobada',
+          'La tienda ha sido aprobada',
+          'success'
+        )
+      } catch (err) {
+        Swal.fire({
+          title: "Error",
+          icon: "error",
+          html:
+            "Ha ocurrido un error al tratar de aprobar esta tienda. Intente de nuevo"
+        });
+      }
+    }
   }
 
 }
