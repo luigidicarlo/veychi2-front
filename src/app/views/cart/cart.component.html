@@ -55,7 +55,7 @@
               <div class="input-group mb-4 border rounded-pill p-2">
                 <input type="text" placeholder="Aplicar cupón" formControlName="coupon" class="form-control border-0">
                 <div class="input-group-append border-0">
-                  <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Aplicar cupón</button>
+                  <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill" [disabled]="couponForm.invalid || couponSubmitted || !cart.length" (click)="applyCoupon()"><i class="fa fa-gift mr-2"></i>Aplicar cupón</button>
                 </div>
               </div>
             </form>
@@ -67,17 +67,16 @@
           </div>
         </div>
         <div class="col-lg-6">
-          <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold bg-header">Total de la orden </div>
+          <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold bg-header">Total del pedido</div>
           <div class="p-4">
             <p class="font-italic mb-4">El envío y los costos adicionales son calculados en base a los datos ingresados</p>
             <ul class="list-unstyled mb-4">
-              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Subtotal de la orden</strong><strong>{{ subtotal }} CLP</strong></li>
-              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Gastos de envío</strong><strong>{{ envio }} CLP</strong></li>
-              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Impuesto</strong><strong>{{ tax }} CLP</strong></li>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Subtotal</strong><strong>{{ subtotal }} CLP</strong></li>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Cupón</strong><strong>{{ couponQuantity }}</strong></li>
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
                 <h5 class="font-weight-bold">{{ total }} CLP</h5>
               </li>
-            </ul><button class="btn btn-dark rounded-pill py-2 btn-block" (click)="makeOrder()">Proceder a pagar</button>
+            </ul><button class="btn btn-dark rounded-pill py-2 btn-block" [disabled]="!cart.length" (click)="makeOrder()">Proceder a pagar</button>
           </div>
         </div>
       </div>

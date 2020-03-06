@@ -20,6 +20,7 @@ export class CartComponent implements OnInit {
 
   public couponForm = new FormGroup({
     coupon: new FormControl("", [
+      Validators.required,
       Validators.minLength(3),
     ])
   });
@@ -28,11 +29,12 @@ export class CartComponent implements OnInit {
   cart: any[] = [];
   coupon: Coupon;
   subtotal: number = 0;
-  envio: number = 0;
-  tax: number = 0;
   total: number = 0;
   couponId: string[] = [];
   productId: string[] = [];
+  couponQuantity: string = '-';
+  couponMatched: boolean = false;
+  couponSubmitted: boolean = false;
 
   constructor(
     public cartService: CartService,
@@ -63,7 +65,7 @@ export class CartComponent implements OnInit {
         this.subtotal += item.price;
       });
     }
-    this.total = this.subtotal + this.envio + this.tax;
+    this.total = this.subtotal;
   }
 
   // Método para borrar items del carrito
@@ -75,15 +77,6 @@ export class CartComponent implements OnInit {
 
   // Método para crear una orden
   async makeOrder() {
-    Swal.fire("Procesando...");
-    Swal.showLoading();
-    if(this.couponForm.get('coupon').value != '') {
-      console.log(this.couponForm.get('coupon').value);
-      console.log("Se agregó cupon");
-      const coupon = this.couponForm.get('coupon').value as string;
-      this.findCoupon(coupon, this.token);
-    }
-
     this.cart.forEach(product => {
       this.productId.push(product._id);
     });
@@ -109,13 +102,11 @@ export class CartComponent implements OnInit {
       const orderSubmitted = await this.orderService.createOrder(order, this.token).catch(err => {
         throw err;
       }) as any;
-
-      Swal.fire({
+      /*Swal.fire({
         title: "Pedido realizado",
         text: `Se realizado un pedido exitosamente. Para más información revise la información del pedido en su perfil`,
         icon: "success"
-      });
-
+      });*/
 
       // POST A LA RESPUESTA DE LA API DE UN PEDIDO
       const paymentRequested = await this.payment.requestPayment(orderSubmitted.url, orderSubmitted.inputName, orderSubmitted.token).catch(err => {
@@ -137,15 +128,69 @@ export class CartComponent implements OnInit {
     }
   }
 
+  async applyCoupon() {
+    const coupon = this.couponForm.get('coupon').value as string;
+    Swal.fire("Procesando...");
+    Swal.showLoading();   
+    await this.findCoupon(coupon, this.token);
+    if(this.coupon) {
+      this.total = 0;
+      this.cart.forEach(item => {
+        if(item.store._id == this.coupon.store._id) {
+          this.couponMatched = true;
+          if (this.coupon.percentage) {
+              item.price = item.price * (1 - (item.discount / 100) - (this.coupon.value / 100))
+          } else {
+              const diff = (item.price * (1 - (item.discount / 100))) - this.coupon.value;
+              item.price = diff <= 0 ? 0 : diff;
+          }
+        }
+        this.total += item.price;
+      });
+
+      this.cart = JSON.parse(this.cartService.getCart());
+
+      if(this.couponMatched) {
+        this.couponSubmitted = true;
+        this.couponId.push(this.coupon._id);
+        if(this.coupon.percentage) this.couponQuantity = `${this.coupon.value}%`;
+        else this.couponQuantity = `${this.coupon.value} CLP`;
+        Swal.fire({
+          title: "Cupón aplicado",
+          text: `Se ha aplicado un cupón exitosamente.`,
+          icon: "success"
+        });
+      }else {
+        Swal.fire({
+          title: "Error",
+          text: "El cupón no es aplicable a ningún producto del carrito",
+          icon: "error"
+        });
+      }
+    } else {
+      Swal.fire({
+        title: "Error",
+        text: "Cupón inválido",
+        icon: "error"
+      });
+    }
+  }
+
   async findCoupon(name: string, token: string) {
+    Swal.fire("Procesando...");
+    Swal.showLoading();
     try {
       this.coupon = await this.couponService.getCoupon(name, token).catch(err => {
         throw err;
-      });
-      this.couponId.push(this.coupon._id);
+      });      
       console.log(this.couponId);
     } catch (err) {
       console.log(err);
+      Swal.fire({
+        title: "Error",
+        text: "Cupón inválido",
+        icon: "error"
+      });
     }
   }
 

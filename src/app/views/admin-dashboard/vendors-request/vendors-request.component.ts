@@ -43,7 +43,7 @@ export class VendorsRequestComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Borrar',
+      confirmButtonText: 'Aprobar',
       cancelButtonText: 'Cancelar'
     });
 
